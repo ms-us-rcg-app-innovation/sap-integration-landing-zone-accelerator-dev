@@ -83,7 +83,7 @@ jobs:
         working-directory: ./bicep
         run : |
           pwd
-          az bicep build --file main.bicep --outfile ../azure-resource-manager/integration-arm.json
+          az bicep build --file main.bicep --outfile ./azure-resource-manager/integration-arm.json
           ls -al
       # Uploading exported ARM template to GitHub's artifact 
       - name: Archive code coverage results
