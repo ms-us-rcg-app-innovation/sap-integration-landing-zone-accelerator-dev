@@ -53,7 +53,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Run Preflight Validation
-        working-directory: ./reference-implementations/AppGW-IAPIM-Func/bicep
+        working-directory: ./bicep
         run: |
             az deployment sub validate \
               --location ${{ fromJson(env.config).AZURE_LOCATION }} \
