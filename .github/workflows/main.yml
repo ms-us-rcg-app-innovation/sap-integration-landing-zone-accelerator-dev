@@ -97,7 +97,7 @@ jobs:
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
-          author_name: APIM-Action
+          author_name: Integration-Action
           author_email: arekbar@microsoft.com
           message: 'ARM template updated'
           cwd: '/azure-resource-manager/'
