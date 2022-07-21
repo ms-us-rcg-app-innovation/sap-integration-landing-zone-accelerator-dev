@@ -15,3 +15,5 @@ az deployment sub  create --name testintegrationdeployment --template-file $BICE
 
 # delete a deployment
 az deployment sub  delete  --name testintegrationdeployment
+
+# az ad sp create-for-rbac --name "integration-landing-zone-app-dev" --role contributor --scopes /subscriptions/86f1b5b3-6a61-4667-b8af-23f9a870b657 --sdk-auth
