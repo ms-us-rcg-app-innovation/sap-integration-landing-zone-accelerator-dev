@@ -23,4 +23,4 @@ jobs:
 
       - name: Validate that bicep builds
         run: az bicep build -f main.bicep
-        working-directory: ./reference-implementations/AppGW-IAPIM-Func/bicep
+        working-directory: ./bicep
