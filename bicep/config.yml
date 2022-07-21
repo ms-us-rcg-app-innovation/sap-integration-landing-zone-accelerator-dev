@@ -1,0 +1,4 @@
+AZURE_LOCATION: 'centralus'
+RESOURCE_NAME_PREFIX: 'demo'
+ENVIRONMENT_TAG: 'dev'
+DEPLOYMENT_NAME: 'testintegrationdeployment'
