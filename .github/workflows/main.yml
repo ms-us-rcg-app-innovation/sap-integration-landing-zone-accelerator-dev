@@ -100,7 +100,7 @@ jobs:
           author_name: APIM-Action
           author_email: arekbar@microsoft.com
           message: 'ARM template updated'
-          cwd: '/reference-implementations/AppGW-IAPIM-Func/azure-resource-manager/'
+          cwd: '/azure-resource-manager/'
           branch_mode: create
           branch: 'arm-${{github.run_number}}'
           add: 'apim-arm.json'
