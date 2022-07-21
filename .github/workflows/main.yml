@@ -83,14 +83,14 @@ jobs:
         working-directory: ./bicep
         run : |
           pwd
-          az bicep build --file main.bicep --outfile ../azure-resource-manager/apim-arm.json
+          az bicep build --file main.bicep --outfile ../azure-resource-manager/integration-arm.json
           ls -al
       # Uploading exported ARM template to GitHub's artifact 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: apim-arm
-          path: /arm/apim-arm.json
+          name: integration-arm
+          path: /arm/integration-arm.json
           retention-days: 2
 
       # Committing and pushing exported ARM template to the same repo.
@@ -103,4 +103,4 @@ jobs:
           cwd: '/azure-resource-manager/'
           branch_mode: create
           branch: 'arm-${{github.run_number}}'
-          add: 'apim-arm.json'
+          add: 'integration-arm.json'
