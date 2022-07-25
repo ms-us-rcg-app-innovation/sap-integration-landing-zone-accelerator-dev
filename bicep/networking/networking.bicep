@@ -13,11 +13,11 @@ param deploymentEnvironment string
 
 param location string
 
-param IntegrationVnetAddressPrefix string = '10.2.0.0/16'
+param IntegrationVnetAddressPrefix string = '172.0.0.0/16'
 
-param GatewaySubnetAddressPrefix string = '10.2.1.0/24'
-param APIManagementSubnetAddressPrefix string = '10.2.2.0/24'
-param AppSubnetAddressPrefix string = '10.2.3.0/24'
+param GatewaySubnetAddressPrefix string = '172.0.1.0/24'
+param APIManagementSubnetAddressPrefix string = '172.0.2.0/24'
+param AppSubnetAddressPrefix string = '172.0.3.0/24'
 
 
 // Variables
