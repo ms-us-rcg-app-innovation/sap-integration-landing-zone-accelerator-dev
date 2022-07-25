@@ -158,6 +158,9 @@ output APIManagementSubnetName string = APIManagementSubnetName
 output APIManagementSubnetId string = '${IntegrationVnet.id}/subnets/${APIManagementSubnetName}'  
 
 output AppSubnetName string = AppSubnetName  
-output AppSubnetId string = '${IntegrationVnet.id}/subnets/${AppSubnetName}'  
+output AppSubnetId string = '${IntegrationVnet.id}/subnets/${AppSubnetName}' 
+
+output DataSourceSubnetName string = AppSubnetName  
+output DataSourceSubnetId string = '${IntegrationVnet.id}/subnets/${DataSourceSubnetName}' 
 
 
