@@ -18,7 +18,7 @@ param IntegrationVnetAddressPrefix string = '172.0.0.0/16'
 param GatewaySubnetAddressPrefix string = '172.0.1.0/24'
 param APIManagementSubnetAddressPrefix string = '172.0.2.0/24'
 param AppSubnetAddressPrefix string = '172.0.3.0/24'
-param DataSourceSubnetAddressPrefix string = '172.0.3.0/24'
+param DataSourceSubnetAddressPrefix string = '172.0.4.0/24'
 
 
 // Variables
