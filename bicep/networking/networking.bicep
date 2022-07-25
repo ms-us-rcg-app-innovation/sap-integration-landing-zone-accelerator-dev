@@ -18,6 +18,7 @@ param IntegrationVnetAddressPrefix string = '172.0.0.0/16'
 param GatewaySubnetAddressPrefix string = '172.0.1.0/24'
 param APIManagementSubnetAddressPrefix string = '172.0.2.0/24'
 param AppSubnetAddressPrefix string = '172.0.3.0/24'
+param DataSourceSubnetAddressPrefix string = '172.0.3.0/24'
 
 
 // Variables
@@ -29,10 +30,12 @@ var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironm
 var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
+var DataSourceSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
 
 var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
+var DataSourceNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
 
 // Resources - VNet - SubNets
 resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
@@ -77,7 +80,15 @@ resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
             id: AppNSG1.id
           }
         }
-        
+      }
+      {
+        name: DataSourceSubnetName
+        properties: {
+          addressPrefix: DataSourceSubnetAddressPrefix
+          networkSecurityGroup: {
+            id: DataSourceNSG1.id
+          }
+        }
       }
     ]
   }
@@ -109,6 +120,28 @@ resource AppNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   properties: {
     securityRules: [
       
+    ]
+  }
+}
+
+resource DataSourceNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
+  name: DataSourceNSG
+  location: location
+  properties: {
+    securityRules: [
+      {
+        name: 'apim-mgmt-endpoint-for-portal'
+        properties: {
+          priority: 2000
+          direction: 'Inbound'
+          sourceAddressPrefix: '64.53.253.86/32'
+          protocol: 'Tcp'
+          destinationPortRange: '*'
+          access: 'Allow'
+          sourcePortRange: '*'
+          destinationAddressPrefix: '*'
+        }
+      }
     ]
   }
 }
