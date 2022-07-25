@@ -30,12 +30,12 @@ var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironm
 var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
-var DataSourceSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
+var DataSourceSubnetName = 'snet-datasrc-${workloadName}-${deploymentEnvironment}-${location}'
 
 var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
-var DataSourceNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
+var DataSourceNSG = 'nsg-datasrc-${workloadName}-${deploymentEnvironment}-${location}'
 
 // Resources - VNet - SubNets
 resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
@@ -130,7 +130,7 @@ resource DataSourceNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   properties: {
     securityRules: [
       {
-        name: 'apim-mgmt-endpoint-for-portal'
+        name: 'SSH'
         properties: {
           priority: 2000
           direction: 'Inbound'
