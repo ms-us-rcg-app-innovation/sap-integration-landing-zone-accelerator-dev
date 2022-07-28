@@ -14,7 +14,7 @@ param location string
 
 var logAnalyticsNamespaceName = 'log-analytics-${workloadName}-${deploymentEnvironment}'
 var appInsightsName = 'app-insights-${workloadName}-${deploymentEnvironment}'
-var logStorageAccountName = 'log-storage-${workloadName}-${deploymentEnvironment}'
+var logStorageAccountName = 'logstorage${workloadName}${deploymentEnvironment}'
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: logAnalyticsNamespaceName
