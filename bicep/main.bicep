@@ -36,10 +36,10 @@ module networking './networking/networking.bicep' = {
 }
 
 // Variables Collected from the networking module
-var IntegrationVnetId = networking.outputs.IntegrationVnetId
-var GatewaySubnetId = networking.outputs.GatewaySubnetId
-var APIManagementSubnetId = networking.outputs.APIManagementSubnetId
-var AppSubnetId = networking.outputs.AppSubnetId
+// var IntegrationVnetId = networking.outputs.IntegrationVnetId
+// var GatewaySubnetId = networking.outputs.GatewaySubnetId
+// var APIManagementSubnetId = networking.outputs.APIManagementSubnetId
+// var AppSubnetId = networking.outputs.AppSubnetId
 // END
 
 module logging './logging/logging.bicep' = {
@@ -67,8 +67,8 @@ module keyvault './keyvault/keyvault.bicep' = {
 }
 
 // Variables Collected from the keyvault module
-var KeyVaultId = keyvault.outputs.KeyVaultId
-var KeyVaultURI = keyvault.outputs.KeyVaultURI
+// var KeyVaultId = keyvault.outputs.KeyVaultId
+// var KeyVaultURI = keyvault.outputs.KeyVaultURI
 // END
 
 module function2a './Scenario2a/function.bicep' = {
