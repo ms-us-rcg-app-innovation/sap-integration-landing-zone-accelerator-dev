@@ -45,4 +45,14 @@ module logging './logging/logging.bicep' = {
   }
 }
 
+module keyvault './keyvault/keyvault.bicep' = {
+  name: 'log-ws-app-ins'
+  scope: resourceGroup(IntegrationRG.name)
+  params: {
+    workloadName: workloadName
+    deploymentEnvironment: environment
+    location: location
+  }
+}
+
 
