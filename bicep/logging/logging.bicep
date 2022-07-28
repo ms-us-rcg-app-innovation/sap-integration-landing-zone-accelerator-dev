@@ -14,6 +14,7 @@ param location string
 
 var logAnalyticsNamespaceName = 'log-analytics-${workloadName}-${deploymentEnvironment}-${location}'
 var appInsightsName = 'app-insights-${workloadName}-${deploymentEnvironment}-${location}'
+var logStorageAccountName = 'log-storage-acct-${workloadName}-${deploymentEnvironment}-${location}'
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' = {
   name: logAnalyticsNamespaceName
@@ -44,8 +45,49 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
+// storage account
+resource storageAccount 'Microsoft.Storage/storageAccounts@2020-08-01-preview' = {
+  name: logStorageAccountName
+  location: location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    minimumTlsVersion: 'TLS1_2'
+    allowBlobPublicAccess: false
+    allowSharedKeyAccess: true
+    largeFileSharesState: 'Disabled'
+    networkAcls: {
+      resourceAccessRules: []
+      bypass: 'AzureServices'
+      virtualNetworkRules: []
+      ipRules: []
+      defaultAction: 'Deny'
+    }
+    supportsHttpsTrafficOnly: true
+    encryption: {
+      services: {
+        file: {
+          keyType: 'Account'
+          enabled: true
+        }
+        blob: {
+          keyType: 'Account'
+          enabled: true
+        }
+      }
+      keySource: 'Microsoft.Storage'
+    }
+    accessTier: 'Hot'
+  }
+}
+
 output LogAnalyticsWorkspaceName string = logAnalyticsNamespaceName
 output LogAnalyticsWorkspaceId string = logAnalyticsWorkspace.id
 
 output appInsightsName string = appInsightsName
 output appInsightsId string = appInsights.id
+
+output storageAccountName string = logStorageAccountName
+output storageAccountId string = storageAccount.id
