@@ -12,10 +12,10 @@ param deploymentEnvironment string
 
 param location string
 
-var keyvaultName = 'ketvault-${workloadName}-${deploymentEnvironment}'
+var keyVaultName = 'ketvault-${workloadName}-${deploymentEnvironment}'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
-  name: keyvaultName
+  name: keyVaultName
   location: location
   properties: {
     createMode: 'default'
@@ -38,6 +38,6 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
-output KeyVaultName string = keyvaultName
+output KeyVaultName string = keyVaultName
 output KeyVaultId string = keyVault.id
 output KeyVaultURI string = keyVault.properties.vaultUri

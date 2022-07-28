@@ -91,3 +91,5 @@ output appInsightsId string = appInsights.id
 
 output storageAccountName string = logStorageAccountName
 output storageAccountId string = storageAccount.id
+
+output azAppInsightsInstrumentationKey string = appInsights.properties.InstrumentationKey
