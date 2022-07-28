@@ -77,7 +77,7 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   location: location
   kind: 'linux'
   sku: {
-    name: 'S1'
+    name: 'P1'
   }
 }
 
