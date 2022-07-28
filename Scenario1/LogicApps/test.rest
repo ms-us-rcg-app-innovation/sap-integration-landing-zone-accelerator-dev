@@ -1,0 +1,112 @@
+
+@statefulsig = OR3XiR2XlA0nbgExcxrwOZNscDyYRVtJoGafJbAYUSY
+@statelesssig = 0B0t5l8z4V2P7BsGgxM3tBa79Z2QyRoK9osaHtV4j4A
+
+@kickoffstatefullsig = Te0A3uisfrFu5kXqlVsfcpfDKirEDksvoDNzaFhNCWo 
+
+### Stateful Workflow Tests
+
+GET http://localhost:7071/api/Stateful1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{statefulsig}}
+    &name=karl
+
+###
+
+###
+
+POST http://localhost:7071/api/Stateful1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{statefulsig}}
+    &name=karl
+
+content-type: application/json
+
+    {
+        "name": "karl"
+    }
+
+
+
+
+### Stateless Workflow Tests
+
+GET http://localhost:7071/api/Stateless1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{statelesssig}}
+    &name=karl
+
+###
+
+POST http://localhost:7071/api/Stateless1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{statelesssig}}
+    &name=karl
+content-type: application/json
+    
+    {
+        "name": "karl"
+    }
+
+### Azure Stateful Test ###
+
+GET https://karlrisslogicappdemo.azurewebsites.net:443/api/Stateful1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig=vzohNRnADr4GjTKHbS29Zx5iBDGoYwqRLYKu4EdS-18
+    &name=karl
+
+### Azure Stateless Test ###
+GET https://karlrisslogicappdemo.azurewebsites.net:443/api/Stateless1/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig=tMA5NUDRmpOioEFBDDlTt9gDUjX3o8deLVs6l-uOtPI
+    &name=karl
+
+
+### Long Running Workflow Tests
+
+
+http://localhost:7071/api/kickofflongrunningworkflow/triggers/manual/invoke
+?api-version=2022-05-01
+&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0
+&sig=Te0A3uisfrFu5kXqlVsfcpfDKirEDksvoDNzaFhNCWo
+
+### NOTE: format can be finiky, cannot have a space between the post and the content type.
+### NOTE: creating the file on the storage account will fail if it already exists.
+POST http://localhost:7071/api/kickofflongrunningworkflow/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{kickoffstatefullsig}}
+content-type: application/json
+    
+    {
+        "requestdata": "this is some simple data",
+        "divideby":"2"
+    }
+
+
+### NOTE: format can be finiky, cannot have a space between the post and the content type.
+### NOTE: creating the file on the storage account will fail if it already exists.
+POST http://localhost:7071/api/kickofflongrunningworkflow/triggers/manual/invoke
+    ?api-version=2022-05-01
+    &sp=%2Ftriggers%2Fmanual%2Frun
+    &sv=1.0
+    &sig={{kickoffstatefullsig}}
+content-type: application/json
+    
+    {
+        "requestdata": "this post will generate an error",
+        "divideby":"0"
+    }

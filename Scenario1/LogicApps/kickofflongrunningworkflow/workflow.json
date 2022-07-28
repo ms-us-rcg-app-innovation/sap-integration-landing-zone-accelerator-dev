@@ -1,0 +1,150 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Response": {
+                "type": "Response",
+                "kind": "http",
+                "inputs": {
+                    "statusCode": 200,
+                    "body": "echo - @{triggerBody()}"
+                },
+                "runAfter": {}
+            },
+            "Scope": {
+                "type": "Scope",
+                "actions": {
+                    "Send_iDoc": {
+                        "type": "ServiceProvider",
+                        "inputs": {
+                            "parameters": {
+                                "containerName": "idoc",
+                                "blobName": "@{slice(workflow().id,11)}.txt",
+                                "content": "@outputs('Execute_JavaScript_Code')"
+                            },
+                            "serviceProviderConfiguration": {
+                                "connectionName": "AzureBlob",
+                                "operationId": "uploadBlob",
+                                "serviceProviderId": "/serviceProviders/AzureBlob"
+                            }
+                        },
+                        "runAfter": {
+                            "Execute_JavaScript_Code": [
+                                "Succeeded"
+                            ]
+                        }
+                    },
+                    "Delay_5_seconds": {
+                        "type": "Wait",
+                        "inputs": {
+                            "until": {
+                                "timestamp": "@{addSeconds(utcNow(),5)}"
+                            }
+                        },
+                        "runAfter": {
+                            "Send_iDoc": [
+                                "Succeeded"
+                            ]
+                        }
+                    },
+                    "Send_SOAP": {
+                        "type": "ServiceProvider",
+                        "inputs": {
+                            "parameters": {
+                                "containerName": "soap",
+                                "blobName": "@{slice(workflow().id,11)}.txt",
+                                "content": "@workflow()"
+                            },
+                            "serviceProviderConfiguration": {
+                                "connectionName": "AzureBlob",
+                                "operationId": "uploadBlob",
+                                "serviceProviderId": "/serviceProviders/AzureBlob"
+                            }
+                        },
+                        "runAfter": {
+                            "Delay_5_seconds": [
+                                "Succeeded"
+                            ]
+                        }
+                    },
+                    "Execute_JavaScript_Code": {
+                        "type": "JavaScriptCode",
+                        "inputs": {
+                            "code": "//learned that dividing by zero in JavaScript doesn't throw an error\r\nvar divisor = parseInt(workflowContext.trigger.outputs.body.divideby);\r\n\r\nif (divisor == 0){\r\n    throw Error(\"divide by zero error\");\r\n    return \"divide by zero error\";\r\n}else{\r\n    return 100/divisor;\r\n}",
+                            "explicitDependencies": {
+                                "includeTrigger": true
+                            }
+                        },
+                        "runAfter": {}
+                    }
+                },
+                "runAfter": {
+                    "Response": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Terminate": {
+                "type": "Terminate",
+                "inputs": {
+                    "runStatus": "Failed",
+                    "runError": {
+                        "code": "-1",
+                        "message": "@{outputs('Execute_JavaScript_Code')}"
+                    }
+                },
+                "runAfter": {
+                    "Scope": [
+                        "FAILED"
+                    ],
+                    "Send_Error_Notification": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "Send_Error_Notification": {
+                "type": "ServiceProvider",
+                "inputs": {
+                    "parameters": {
+                        "containerName": "errors",
+                        "blobName": "@{slice(workflow().id,11)}.txt",
+                        "content": "@workflow().run.id"
+                    },
+                    "serviceProviderConfiguration": {
+                        "connectionName": "AzureBlob",
+                        "operationId": "uploadBlob",
+                        "serviceProviderId": "/serviceProviders/AzureBlob"
+                    }
+                },
+                "runAfter": {
+                    "Scope": [
+                        "FAILED"
+                    ]
+                }
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "requestdata": {
+                                "type": "string"
+                            },
+                            "divideby": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "operationOptions": "EnableSchemaValidation"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    },
+    "kind": "Stateful"
+}
