@@ -18,7 +18,7 @@ var functionAppName = 'functionapp-scenario2a-${workloadName}-${deploymentEnviro
 var appServiceName = 'appservice-scenario2a-${workloadName}-${deploymentEnvironment}'
 
 // remove dashes for storage account name
-var storageAccountName = 'function2a-${workloadName}-${deploymentEnvironment}'
+var storageAccountName = 'functa${workloadName}${deploymentEnvironment}'
 
 var appTags = {
   AppID: 'myfunc 2a'
