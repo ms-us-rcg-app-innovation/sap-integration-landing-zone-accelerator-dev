@@ -23,16 +23,16 @@ param AppSubnetAddressPrefix string = '192.168.3.0/24'
 var OwnerTagValue = 'IntegrationLandingZoneTeam'
 
 
-var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironment}-${location}'
+var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironment}'
 
-var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}-${location}'
-var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}-${location}'
-var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
+var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}'
+var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}'
+var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}'
 
 
-var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}-${location}'
-var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}-${location}'
-var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
+var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}'
+var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}'
+var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}'
 
 
 // Resources - VNet - SubNets
