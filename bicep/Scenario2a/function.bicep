@@ -14,8 +14,8 @@ param location string
 
 param appInsightsInstrumentationKey string
 
-var functionAppName = 'functionapp-scenario2aw-${workloadName}-${deploymentEnvironment}'
-var appServiceName = 'appservice-scenario2aw-${workloadName}-${deploymentEnvironment}'
+var functionAppName = 'functionapp-scenario2win-${workloadName}-${deploymentEnvironment}'
+var appServiceName = 'appservice-scenario2win-${workloadName}-${deploymentEnvironment}'
 
 // remove dashes for storage account name
 var storageAccountName = 'functa${workloadName}${deploymentEnvironment}'
