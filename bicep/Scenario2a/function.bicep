@@ -111,7 +111,7 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
-          value: '${toLower(functionAppName)}'
+          value: functionAppName
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
@@ -129,9 +129,7 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
     }
   }
 
-  dependsOn: [
-    appService
-  ]
+
 }
 
 // Function App Binding
