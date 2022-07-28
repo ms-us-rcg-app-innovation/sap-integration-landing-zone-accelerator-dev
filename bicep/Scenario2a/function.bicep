@@ -14,8 +14,8 @@ param location string
 
 param appInsightsInstrumentationKey string
 
-var functionAppName = 'functionapp-scenario2win-${workloadName}-${deploymentEnvironment}'
-var appServiceName = 'appservice-scenario2win-${workloadName}-${deploymentEnvironment}'
+var functionAppName = 'functionapp-scenario2lin-${workloadName}-${deploymentEnvironment}'
+var appServiceName = 'appservice-scenario2lin-${workloadName}-${deploymentEnvironment}'
 
 // remove dashes for storage account name
 var storageAccountName = 'functa${workloadName}${deploymentEnvironment}'
@@ -71,11 +71,11 @@ resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2019-06-01
 
 resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServiceName
-  // properties:{
-  //   reserved: true
-  // }
+  properties:{
+    reserved: true
+  }
   location: location
-  kind: 'windows'
+  kind: 'linux'
   sku: {
     name: 'S1'
   }
