@@ -46,7 +46,7 @@ module logging './logging/logging.bicep' = {
 }
 
 module keyvault './keyvault/keyvault.bicep' = {
-  name: 'log-ws-app-ins'
+  name: 'keyvault'
   scope: resourceGroup(IntegrationRG.name)
   params: {
     workloadName: workloadName
