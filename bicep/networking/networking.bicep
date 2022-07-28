@@ -18,7 +18,7 @@ param IntegrationVnetAddressPrefix string = '192.168.0.0/16'
 param GatewaySubnetAddressPrefix string = '192.168.1.0/24'
 param APIManagementSubnetAddressPrefix string = '192.168.2.0/24'
 param AppSubnetAddressPrefix string = '192.168.3.0/24'
-param DataSourceSubnetAddressPrefix string = '192.168.4.0/24'
+
 
 
 // Variables
@@ -30,12 +30,12 @@ var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironm
 var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}-${location}'
-var DataSourceSubnetName = 'snet-datasrc-${workloadName}-${deploymentEnvironment}-${location}'
+
 
 var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}-${location}'
 var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}-${location}'
 var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}-${location}'
-var DataSourceNSG = 'nsg-datasrc-${workloadName}-${deploymentEnvironment}-${location}'
+
 
 // Resources - VNet - SubNets
 resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
@@ -81,15 +81,7 @@ resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
           }
         }
       }
-      {
-        name: DataSourceSubnetName
-        properties: {
-          addressPrefix: DataSourceSubnetAddressPrefix
-          networkSecurityGroup: {
-            id: DataSourceNSG1.id
-          }
-        }
-      }
+
     ]
   }
 }
@@ -124,27 +116,7 @@ resource AppNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   }
 }
 
-resource DataSourceNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
-  name: DataSourceNSG
-  location: location
-  properties: {
-    securityRules: [
-      {
-        name: 'SSH'
-        properties: {
-          priority: 2000
-          direction: 'Inbound'
-          sourceAddressPrefix: '64.53.253.86/32'
-          protocol: 'Tcp'
-          destinationPortRange: '*'
-          access: 'Allow'
-          sourcePortRange: '*'
-          destinationAddressPrefix: '*'
-        }
-      }
-    ]
-  }
-}
+
 
 // Outputs
 
@@ -160,7 +132,5 @@ output APIManagementSubnetId string = '${IntegrationVnet.id}/subnets/${APIManage
 output AppSubnetName string = AppSubnetName  
 output AppSubnetId string = '${IntegrationVnet.id}/subnets/${AppSubnetName}' 
 
-output DataSourceSubnetName string = AppSubnetName  
-output DataSourceSubnetId string = '${IntegrationVnet.id}/subnets/${DataSourceSubnetName}' 
 
 
