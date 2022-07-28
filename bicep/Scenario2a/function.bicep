@@ -77,8 +77,7 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   location: location
   kind: 'linux'
   sku: {
-    name: 'Y1'
-    tier: 'Dynamic'
+    name: 'S1'
   }
 }
 
