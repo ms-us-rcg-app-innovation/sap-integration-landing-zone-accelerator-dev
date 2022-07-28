@@ -43,3 +43,9 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
     WorkspaceResourceId: '/subscriptions/${subscription().subscriptionId}/resourceGroups/${resourceGroup().name}/providers/Microsoft.OperationalInsights/workspaces/${logAnalyticsNamespaceName}'
   }
 }
+
+output LogAnalyticsWorkspaceName string = logAnalyticsNamespaceName
+output LogAnalyticsWorkspaceId string = logAnalyticsWorkspace.id
+
+output appInsightsName string = appInsightsName
+output appInsightsId string = appInsights.id
