@@ -71,9 +71,9 @@ resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2019-06-01
 
 resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServiceName
-  properties:{
-    reserved: true
-  }
+  // properties:{
+  //   reserved: true
+  // }
   location: location
   kind: 'windows'
   sku: {
