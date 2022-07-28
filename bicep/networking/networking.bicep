@@ -8,13 +8,11 @@ param workloadName string
   'uat'
   'prod'
 ])
-
 param deploymentEnvironment string
 
 param location string
 
 param IntegrationVnetAddressPrefix string = '192.168.0.0/16'
-
 param GatewaySubnetAddressPrefix string = '192.168.1.0/24'
 param APIManagementSubnetAddressPrefix string = '192.168.2.0/24'
 param AppSubnetAddressPrefix string = '192.168.3.0/24'

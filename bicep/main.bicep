@@ -35,4 +35,14 @@ module networking './networking/networking.bicep' = {
   }
 }
 
+module logging './logging/logging.bicep' = {
+  name: 'log-ws-app-ins'
+  scope: resourceGroup(IntegrationRG.name)
+  params: {
+    workloadName: workloadName
+    deploymentEnvironment: environment
+    location: location
+  }
+}
+
 
