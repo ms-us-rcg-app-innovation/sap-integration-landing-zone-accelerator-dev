@@ -14,11 +14,11 @@ param location string
 
 param appInsightsInstrumentationKey string
 
-var functionAppName = 'functionapp-scenario2lin-${workloadName}-${deploymentEnvironment}'
-var appServiceName = 'appservice-scenario2lin-${workloadName}-${deploymentEnvironment}'
+var functionAppName = 'functionapp-data-ingestion-${workloadName}-${deploymentEnvironment}'
+var appServiceName = 'appservice-data-ingestion-${workloadName}-${deploymentEnvironment}'
 
 // remove dashes for storage account name
-var storageAccountName = 'functa${workloadName}${deploymentEnvironment}'
+var storageAccountName = 'funcdataingest${workloadName}${deploymentEnvironment}'
 
 var appTags = {
   AppID: 'myfunc 2a'
@@ -77,7 +77,7 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   location: location
   kind: 'linux'
   sku: {
-    name: 'P1'
+    name: 'P1V2'
   }
 }
 
