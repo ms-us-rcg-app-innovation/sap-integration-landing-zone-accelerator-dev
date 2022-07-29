@@ -71,6 +71,16 @@ module keyvault './keyvault/keyvault.bicep' = {
 // var KeyVaultURI = keyvault.outputs.KeyVaultURI
 // END
 
+module servicebus './servicebus/servicebus.bicep' = {
+  name: 'servicebus'
+  scope: resourceGroup(IntegrationRG.name)
+  params: {
+    workloadName: workloadName
+    deploymentEnvironment: environment
+    location: location
+  }
+}
+
 module function2a './Scenario2a/function.bicep' = {
   name: 'functionScenario2a'
   scope: resourceGroup(IntegrationRG.name)
@@ -81,3 +91,4 @@ module function2a './Scenario2a/function.bicep' = {
     appInsightsInstrumentationKey: appInsightsInstrumentationKey
   }
 }
+
