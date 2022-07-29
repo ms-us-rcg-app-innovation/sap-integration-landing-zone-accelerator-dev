@@ -82,14 +82,9 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
 }
 
 // Function App
-resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
-  name: functionAppName
-  location: location
-  identity: {
+resource functionApp 'Microsoft.Web/sites@2020-06-01' = { name: functionAppName, location: location, identity: {
     type: 'SystemAssigned'
-  }
-  kind: 'functionapp'
-  properties: {    
+  }, kind: 'functionapp', properties: {
     httpsOnly: true
     serverFarmId: appService.id
     clientAffinityEnabled: true
@@ -122,22 +117,18 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
         }
         {
           name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value:'InstrumentationKey=${appInsightsInstrumentationKey}'
+          value: 'InstrumentationKey=${appInsightsInstrumentationKey}'
+        }
+        {
+          name: 'LD_LIBRARY_PATH'
+          value: '/home/site/wwwroot/bin/runtimes/linux-x64/native'
         }
       ]
     }
-  }
-
-
-}
+  } }
 
 // Function App Binding
-resource functionAppBinding 'Microsoft.Web/sites/hostNameBindings@2020-06-01' = {
-  parent: functionApp
-
-  name: '${functionApp.name}.azurewebsites.net'
-  properties: {
+resource functionAppBinding 'Microsoft.Web/sites/hostNameBindings@2020-06-01' = { parent: functionApp, name: '${functionApp.name}.azurewebsites.net', properties: {
     siteName: functionApp.name
     hostNameType: 'Verified'
-  }
-}
+  } }
