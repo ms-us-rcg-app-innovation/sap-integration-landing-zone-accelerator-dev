@@ -83,8 +83,9 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
 var settingName = 'appservicelogging'
 param workspaceId string
 ///////////////////////
-resource setting 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource setting 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
   name: settingName
+  scope: appService
   properties: {
     workspaceId: workspaceId
     logs: [
