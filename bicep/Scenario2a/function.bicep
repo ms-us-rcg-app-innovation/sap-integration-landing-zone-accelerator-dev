@@ -88,7 +88,7 @@ resource setting 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
   scope: appService
   properties: {
     workspaceId: workspaceId
-    logs: [
+    metrics: [
       {
         category: 'AllMetrics'
         enabled: true
