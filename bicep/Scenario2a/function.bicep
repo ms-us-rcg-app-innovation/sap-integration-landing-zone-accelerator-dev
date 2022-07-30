@@ -80,7 +80,22 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
     name: 'P1V2'
   }
 }
-
+var settingName = 'appservicelogging'
+param workspaceId string
+///////////////////////
+resource setting 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  name: settingName
+  properties: {
+    workspaceId: workspaceId
+    logs: [
+      {
+        category: 'AllMetrics'
+        enabled: true
+      }
+    ]
+  }
+}
+//////////////////////
 // Function App
 resource functionApp 'Microsoft.Web/sites@2020-06-01' = { name: functionAppName, location: location, identity: {
     type: 'SystemAssigned'

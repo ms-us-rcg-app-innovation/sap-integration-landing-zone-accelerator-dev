@@ -54,6 +54,7 @@ module logging './logging/logging.bicep' = {
 
 // Variables Collected from the logging module
 var appInsightsInstrumentationKey = logging.outputs.azAppInsightsInstrumentationKey
+var LogAnalyticsWorkspaceId = logging.outputs.LogAnalyticsWorkspaceId
 // END
 
 module keyvault './keyvault/keyvault.bicep' = {
@@ -85,6 +86,7 @@ module function2a './Scenario2a/function.bicep' = {
   name: 'functionScenario2a'
   scope: resourceGroup(IntegrationRG.name)
   params: {
+    workspaceId: LogAnalyticsWorkspaceId
     workloadName: workloadName
     deploymentEnvironment: environment
     location: location
