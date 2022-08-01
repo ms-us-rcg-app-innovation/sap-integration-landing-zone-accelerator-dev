@@ -69,19 +69,6 @@ resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2019-06-01
   }
 }
 
-// resource storageDiagnostics 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
-//   name: settingName
-//   scope: storageAccount
-//   properties: {
-//     workspaceId: workspaceId
-//     metrics: [
-//       {
-//         category: 'AllMetrics'
-//         enabled: true
-//       }
-//     ]
-//   }
-// }
 
 resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServiceName
@@ -94,28 +81,12 @@ resource appService 'Microsoft.Web/serverfarms@2020-06-01' = {
     name: 'P1V2'
   }
 }
-// var settingName = 'appservicelogging'
-// param workspaceId string
-// ///////////////////////
-// resource appServicePlanDiagnostics 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
-//   name: settingName
-//   scope: appService
-//   properties: {
-//     workspaceId: workspaceId
-//     metrics: [
-//       {
-//         category: 'AllMetrics'
-//         enabled: true
-//       }
-//     ]
-//   }
-// }
-
-var settingName = 'allLogging'
+var settingName = 'SendLogsToWorkspace'
 param workspaceId string
 ///////////////////////
-resource allDiagnostics 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
+resource appServicePlanDiagnostics 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
   name: settingName
+  scope: appService
   properties: {
     workspaceId: workspaceId
     metrics: [
