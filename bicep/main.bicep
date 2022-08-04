@@ -11,9 +11,7 @@ param workloadName string
   'uat'
   'prod'
 ])
-
 param environment string
-
 param location string = deployment().location
 
 // Variables
@@ -36,10 +34,11 @@ module networking './networking/networking.bicep' = {
 }
 
 // Variables Collected from the networking module
-// var IntegrationVnetId = networking.outputs.IntegrationVnetId
+//var IntegrationVnetId = networking.outputs.IntegrationVnetId
+var AppVnetIntSubnetId = networking.outputs.AppVnetIntSubnetId
 // var GatewaySubnetId = networking.outputs.GatewaySubnetId
 // var APIManagementSubnetId = networking.outputs.APIManagementSubnetId
-// var AppSubnetId = networking.outputs.AppSubnetId
+var AppSubnetId = networking.outputs.AppSubnetId
 // END
 
 module logging './logging/logging.bicep' = {
@@ -94,3 +93,16 @@ module function2a './Scenario2a/function.bicep' = {
   }
 }
 
+module logicApps './LogicApps/logicapp.bicep' = {
+  name: 'logicapp'
+  scope: resourceGroup(IntegrationRG.name)
+  params: {
+    workloadName: workloadName
+    deploymentEnvironment: environment
+    workspaceId: LogAnalyticsWorkspaceId
+    vNetSubnetId_vNetIntegration: AppVnetIntSubnetId
+    vNetSubnetId_privateEndpoint: AppSubnetId
+    appInsightsInstrumentationKey: appInsightsInstrumentationKey
+    location: location
+  }
+}

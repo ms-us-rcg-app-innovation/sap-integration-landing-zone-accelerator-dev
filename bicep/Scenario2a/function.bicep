@@ -14,11 +14,12 @@ param location string
 
 param appInsightsInstrumentationKey string
 
-var functionAppName = 'functionapp-data-ingestion-${workloadName}-${deploymentEnvironment}'
-var appServiceName = 'appservice-data-ingestion-${workloadName}-${deploymentEnvironment}'
+var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
+var functionAppName = 'functionapp-data-ingestion-${workloadName}-${deploymentEnvironment}-${uniquetoken}'
+var appServiceName = 'appservice-data-ingestion-${workloadName}-${deploymentEnvironment}-${uniquetoken}'
 
 // remove dashes for storage account name
-var storageAccountName = 'funcdataingest${workloadName}${deploymentEnvironment}'
+var storageAccountName = 'funcdataingest${workloadName}${deploymentEnvironment}${uniquetoken}'
 
 var appTags = {
   AppID: 'myfunc 2a'

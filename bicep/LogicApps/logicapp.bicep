@@ -1,21 +1,21 @@
 //Deploy App Service Workflow Plan, LogicApp Workflow configured with vNet integration and private endpoint
-//TODO: Wire up to diagnostics
 //TODO: Wire up and Deploy OnPrem connector
 
-param Prefix string
-// param LogAnalytics string
-// param ApplicationInsights string
+param workloadName string
+param workspaceId string
+param appInsightsInstrumentationKey string
+param deploymentEnvironment string
 // param OnPremDataConnector string
 
-param vNetSubnetId_vNetIntegration string = '/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/dscg/providers/Microsoft.Network/virtualNetworks/dscgvnet/subnets/default'
-param vNetSubnetId_privateEndpoint string = '/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/dscg/providers/Microsoft.Network/virtualNetworks/dscgvnet/subnets/test2'
+param vNetSubnetId_vNetIntegration string // = '/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/dscg/providers/Microsoft.Network/virtualNetworks/dscgvnet/subnets/default'
+param vNetSubnetId_privateEndpoint string // = '/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/dscg/providers/Microsoft.Network/virtualNetworks/dscgvnet/subnets/test2'
 
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
 var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
-var LogicAppPlan_name = '${Prefix}LogicAppAppPlan${uniquetoken}'
-var LogicApp_Name = '${Prefix}Scenario1${uniquetoken}'
+var LogicAppPlan_name = 'LogicAppAppPlan-${workloadName}-${deploymentEnvironment}-${uniquetoken}'
+var LogicApp_Name = 'Scenario1-${workloadName}-${deploymentEnvironment}-${uniquetoken}'
 
 resource serverfarms_LogicAppAppPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
   name: LogicAppPlan_name
@@ -39,6 +39,19 @@ resource serverfarms_LogicAppAppPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
     targetWorkerCount: 0
     targetWorkerSizeId: 0
     zoneRedundant: false
+  }
+}
+resource workflowPlanDiagnostics 'microsoft.insights/diagnosticSettings@2017-05-01-preview' = {
+  name: 'WorkflowLogs-${workloadName}-${deploymentEnvironment}'
+  scope: serverfarms_LogicAppAppPlan 
+  properties: {
+    workspaceId: workspaceId
+    metrics:[
+      {
+        category: 'AllMetrics'
+        enabled: true
+      }
+    ]
   }
 }
 
@@ -77,6 +90,16 @@ resource sites_karlrisslogicappdemo_name_resource 'Microsoft.Web/sites@2021-03-0
       http20Enabled: false
       functionAppScaleLimit: 0
       minimumElasticInstanceCount: 1
+      appSettings:[
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: appInsightsInstrumentationKey
+        }
+        {
+          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
+          value: appInsightsInstrumentationKey
+        }
+      ]
     }
     scmSiteAlsoStopped: false
     clientAffinityEnabled: false
@@ -90,25 +113,25 @@ resource sites_karlrisslogicappdemo_name_resource 'Microsoft.Web/sites@2021-03-0
     redundancyMode: 'None'
     storageAccountRequired: false
     keyVaultReferenceIdentity: 'SystemAssigned'
-    virtualNetworkSubnetId: vNetSubnetId_vNetIntegration
+    //virtualNetworkSubnetId: vNetSubnetId_vNetIntegration
   }
 }
 
-resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01'= {
-  name: '${Prefix}_PE_${uniquetoken}'
-  location: location
-  properties:{
-    subnet:{
-      id: vNetSubnetId_privateEndpoint
-    }
-    privateLinkServiceConnections: [
-      {
-        name: '${Prefix}_PE_${uniquetoken}'
-        properties:{
-          privateLinkServiceId: sites_karlrisslogicappdemo_name_resource.id
-          groupIds:['sites']
-        }
-      }
-    ]
-  }
-}
+// resource privateEndpoint 'Microsoft.Network/privateEndpoints@2021-05-01'= {
+//   name: '${Prefix}_PE_${uniquetoken}'
+//   location: location
+//   properties:{
+//     subnet:{
+//       id: vNetSubnetId_privateEndpoint
+//     }
+//     privateLinkServiceConnections: [
+//       {
+//         name: '${Prefix}_PE_${uniquetoken}'
+//         properties:{
+//           privateLinkServiceId: sites_karlrisslogicappdemo_name_resource.id
+//           groupIds:['sites']
+//         }
+//       }
+//     ]
+//   }
+// }

@@ -16,23 +16,23 @@ param IntegrationVnetAddressPrefix string = '192.168.0.0/16'
 param GatewaySubnetAddressPrefix string = '192.168.1.0/24'
 param APIManagementSubnetAddressPrefix string = '192.168.2.0/24'
 param AppSubnetAddressPrefix string = '192.168.3.0/24'
-
-
+param AppVnetIntAddressPrefix string = '192.168.4.0/24'
 
 // Variables
 var OwnerTagValue = 'IntegrationLandingZoneTeam'
-
 
 var IntegrationVnetName = 'integration-vnet-${workloadName}-${deploymentEnvironment}'
 
 var GatewaySubnetName = 'snet-gw-${workloadName}-${deploymentEnvironment}'
 var APIManagementSubnetName = 'snet-apim-${workloadName}-${deploymentEnvironment}'
 var AppSubnetName = 'snet-app-${workloadName}-${deploymentEnvironment}'
+var AppVnetIntSubnetName = 'snet-appvnetint-${workloadName}-${deploymentEnvironment}'
 
 
 var GatewayNSG = 'nsg-gw-${workloadName}-${deploymentEnvironment}'
 var APIManagementNSG = 'nsg-apim-${workloadName}-${deploymentEnvironment}'
 var AppNSG = 'nsg-app-${workloadName}-${deploymentEnvironment}'
+var AppVnetIntNSG = 'nsg-appvnetint-${workloadName}-${deploymentEnvironment}'
 
 
 // Resources - VNet - SubNets
@@ -79,6 +79,24 @@ resource IntegrationVnet 'Microsoft.Network/virtualNetworks@2021-02-01' = {
           }
         }
       }
+      {
+        name: AppVnetIntSubnetName
+        properties: {
+          addressPrefix: AppVnetIntAddressPrefix
+          networkSecurityGroup: {
+            id: AppVnetIntNSG1.id
+          }
+          serviceEndpoints: [ ]
+          delegations:[
+            {
+              name:'Microsoft.Web.serverFarms'
+              properties: {
+                serviceName: 'Microsoft.Web/serverFarms'
+              }
+            }
+          ]
+        }
+      }
 
     ]
   }
@@ -114,12 +132,24 @@ resource AppNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
   }
 }
 
+resource AppVnetIntNSG1 'Microsoft.Network/networkSecurityGroups@2020-06-01' = {
+  name: AppVnetIntNSG
+  location: location
+  properties: {
+    securityRules: [
+      
+    ]
+  }
+}
 
 
 // Outputs
 
 output IntegrationVnetName string = IntegrationVnetName
 output IntegrationVnetId string = IntegrationVnet.id
+
+output AppVnetIntSubnetName string = AppVnetIntSubnetName
+output AppVnetIntSubnetId string = '${IntegrationVnet.id}/subnets/${AppVnetIntSubnetName}'
 
 output GatewaySubnetName string = GatewaySubnetName  
 output GatewaySubnetId string = '${IntegrationVnet.id}/subnets/${GatewaySubnetName}'  
