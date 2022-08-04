@@ -81,7 +81,7 @@ module servicebus './servicebus/servicebus.bicep' = {
   }
 }
 
-module function2a './Scenario2a/function.bicep' = {
+module function2a './Functions/function.bicep' = {
   name: 'functionScenario2a'
   scope: resourceGroup(IntegrationRG.name)
   params: {
