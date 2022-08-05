@@ -1,0 +1,19 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "name": "scenario1 root"
+        },
+        {
+            "path": "./LogicApps",
+            "name": "Scenario1 LogicApps"
+        },
+        {
+            "path": "./Bicep",
+            "name": "Scenario1 Bicep"
+        },
+        {
+            "path": "../.github"
+        }
+    ]
+}

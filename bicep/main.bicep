@@ -81,8 +81,8 @@ module servicebus './servicebus/servicebus.bicep' = {
   }
 }
 
-module function2a './Functions/function.bicep' = {
-  name: 'functionScenario2a'
+module functions './Functions/function.bicep' = {
+  name: 'functions'
   scope: resourceGroup(IntegrationRG.name)
   params: {
     workspaceId: LogAnalyticsWorkspaceId

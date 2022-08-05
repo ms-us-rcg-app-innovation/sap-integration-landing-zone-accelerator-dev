@@ -1,0 +1,25 @@
+name: 'Scenario1Deploy'
+ 
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Package
+      run: (cd Scenario1/LogicApps; mkdir -p ../../output; zip -r ../../output/scenario1workflow.zip .)
+    - name: Upload Package
+      uses: actions/upload-artifact@v2
+      with:
+        name: scenario1workflow
+        path: ./output/
+        retetntion-days: 1
+
+deploy:
+  name: deploy
+  runs-on: ubuntu-latest
+  needs: [build]
