@@ -82,6 +82,16 @@ module servicebus './servicebus/servicebus.bicep' = {
   }
 }
 
+module apim './apim/apim.bicep' = {
+  name: 'apim'
+  scope: resourceGroup(IntegrationRG.name)
+  params: {
+    workloadName: workloadName
+    deploymentEnvironment: environment
+    location: location
+  }
+}
+
 module function2a './Scenario2a/function.bicep' = {
   name: 'functionScenario2a'
   scope: resourceGroup(IntegrationRG.name)
