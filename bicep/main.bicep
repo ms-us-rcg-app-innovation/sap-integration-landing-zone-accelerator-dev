@@ -18,7 +18,7 @@ param location string = deployment().location
 
 // Variables
 var resourceSuffix = '${workloadName}-${environment}-${location}-001'
-var IntegrationResourceGroupName = 'rg-integration-${resourceSuffix}'
+var IntegrationResourceGroupName = 'sap-integration-lz-${resourceSuffix}'
 
 resource IntegrationRG 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: IntegrationResourceGroupName
