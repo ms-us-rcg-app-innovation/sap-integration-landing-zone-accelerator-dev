@@ -12,7 +12,7 @@ param deploymentEnvironment string
 
 param location string
 
-var apiManagementServiceName = 'apim-${workloadName}-${deploymentEnvironment}-cit'
+var apiManagementServiceName = 'sap-integration-${workloadName}-${deploymentEnvironment}'
 
 var publisherEmail = 'arekbar@microsoft.com'
 
