@@ -12,7 +12,7 @@ param deploymentEnvironment string
 
 param location string
 
-var keyVaultName = 'ketvault-${workloadName}-${deploymentEnvironment}'
+var keyVaultName = 'sap-integration-${workloadName}-${deploymentEnvironment}'
 
 resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   name: keyVaultName
