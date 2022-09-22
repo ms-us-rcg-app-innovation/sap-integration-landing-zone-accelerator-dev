@@ -12,7 +12,7 @@ param deploymentEnvironment string
 
 param location string
 
-var serviceBusNamespaceName = 'sb-${workloadName}-${deploymentEnvironment}'
+var serviceBusNamespaceName = 'sap-integration-${workloadName}-${deploymentEnvironment}'
 var serviceBusQueueName = 'sb-inbound-queue-${workloadName}-${deploymentEnvironment}'
 
 resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2017-04-01' = {
