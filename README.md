@@ -6,6 +6,7 @@ Integration Landing Zone Current State
 - Main Branch: Deploys APIM, Service Bus, KeyVault, Networking, Function, powershell script helper
 - Main Branch: GitHub Workflow to deploy Infra
 - KarlDev: Initial Async LogicApp Scenario, Bicep, deployment workflow
+- seth-dev: Pulling items from Nike collab, organization, and initial telemetry 
 
 Nike Colab Current State
 - .devContainer
