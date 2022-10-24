@@ -17,4 +17,7 @@ jobs:
       with:
         name: scenario1workflow
         path: ./output/
-        retetntion-days: 1
+
+  deployment:
+    runs-on: ubuntu-latest
+    environment: karldev
