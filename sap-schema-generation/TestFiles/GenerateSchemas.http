@@ -1,0 +1,11 @@
+### Uses Extension: REST Client by Huachao Mao
+
+### Get post url by right clicking on workflow.json and reviewing the overview
+POST http://localhost:7071/api/Get_Schemas/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CSfBHT3I8x-71iC4YjUIpx4F40FLpCaUqG8Y_FeZMiM HTTP/1.1
+content-type: application/json
+
+[
+    {"name":"BAPI_MATERIAL_LIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GETLIST"},
+    {"name":"BAPI_MATERIAL_GET_DETAIL","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GET_DETAIL"},
+    {"name":"BAPI_MATPHYSINV_GETLIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Bapi/BUS2028/GETLIST/BAPI_MATPHYSINV_GETLIST"}
+]
