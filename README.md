@@ -7,9 +7,21 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 * Azure Subscription
 * VS Code
-* Connectivity to SAP - **Link to guide**
+* Connectivity to SAP - **INSERT LINK TO GUIDE?**
 
 ## Contents
+
+
+## Core Prerequisites
+
+## Installation
+
+## Addons
+
+## Security
+
+## Testing
+
 Integration Landing Zone Current State
 - Main Branch: Deploys APIM, Service Bus, KeyVault, Networking, Function, powershell script helper
 - Main Branch: GitHub Workflow to deploy Infra
@@ -77,18 +89,6 @@ Asset Goal/Vision
 Asset Strategy Thoughts and Questions
 Structure: 
 We have a base set of artifacts and scenarios that sit on top.  I think the base artifacts should deploy the infrastructure, wire up monitoring.  I think each scenario should deploy infrastructure that is only used by that scenario and have documentation specific to that scenario.
-
-
-## Core Prerequisites
-
-## Installation
-
-## Addons
-
-## Security
-
-## Testing
-
 ## Retail Materials
 
 ## Architecture
