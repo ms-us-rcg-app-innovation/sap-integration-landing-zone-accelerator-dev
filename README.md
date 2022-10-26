@@ -23,7 +23,8 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 ## Getting Started
 
-+ Deploying Landing Zone Services
+We will be utilizing several Azure services for our SAP integration. The base services are infrastructure as code via Bicep. There are two main methods for deploying the Bicep script.
+
   + [Powershell](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
   + [Github Actions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
 
