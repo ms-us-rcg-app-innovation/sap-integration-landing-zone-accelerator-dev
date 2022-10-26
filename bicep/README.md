@@ -1,6 +1,6 @@
 <!-- ABOUT THE PROJECT -->
 # Powershell Deployment
-The following PowerShell commands will require azure CLI to be installed
+Executing the deployment of bicep defined resources will require azure CLI to be installed
   + [Installing AZ CLI for Powershell](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
 ```powershell
