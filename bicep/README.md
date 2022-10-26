@@ -1,17 +1,17 @@
 <!-- ABOUT THE PROJECT -->
-# About The Project
+# Powershell Deployment
+
+```powershell
+s = "Python syntax highlighting"
+print s
+```
 
 
 ## Core Prerequisites
 
-
 ## Contents
 
-
-
 ## Getting Started
-
-
 
 ## Addons
 
