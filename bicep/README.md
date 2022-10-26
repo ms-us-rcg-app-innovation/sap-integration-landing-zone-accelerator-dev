@@ -11,20 +11,11 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 ## Contents
 
-+ Integration Landing Zone Deployment Scripts
-+ Configuring SAP Data Connector for LogicApps
-+ SAP Credential Mapping
-  + JWT to Basic Credential Exchange
-  + JWT to SAML Token Exchange
-+ Asyhronous Patterns
-+ Synchronous Pattern
-+ End to End Logging and Monitoring
-+ Secret Management
+
 
 ## Getting Started
 
-+ Deploying Landing Zone Services
-+ 
+
 
 ## Addons
 

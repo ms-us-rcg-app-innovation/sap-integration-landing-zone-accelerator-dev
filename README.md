@@ -24,7 +24,8 @@ We are excited to announce the release of the SAP integration accelerator. The p
 ## Getting Started
 
 + Deploying Landing Zone Services
-+ 
+  + [Powershell](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
+  + [Github Actions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
 
 ## Addons
 
