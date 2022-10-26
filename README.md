@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-We are excited to announce the release of the SAP integration accelerator. The purpose of the accelerator is to help customers modernize the way they surface and interact with SAP systems. 
+We are excited to announce the release of the SAP integration accelerator. The purpose of the accelerator is to help customers modernize the way they surface and interact with SAP systems. This repository contains best practices, samples and reusable code to serve as starting points for your SAP integration projects.
 
 ## Prerequisites
 
@@ -11,6 +11,8 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 ## Contents
 
+1. Infrastructure as Code with Bicep
+   1. 
 
 ## Core Prerequisites
 
