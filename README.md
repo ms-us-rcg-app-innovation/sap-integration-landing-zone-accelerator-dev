@@ -11,8 +11,9 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 ## Contents
 
-1. Infrastructure as Code with Bicep
-   1. 
++ Integration Landing Zone Deployment Scripts
+  + Test
+
 
 ## Core Prerequisites
 
