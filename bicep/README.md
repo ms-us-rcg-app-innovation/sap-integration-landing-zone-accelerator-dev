@@ -17,13 +17,14 @@ az account set --subscription "SubscriptionID"
 
 # deploy the bicep file directly
 az deployment sub  create --name testintegrationdeployment --template-file $BICEP_FILE --parameters parameters.json --location $LOCATION -o json
-
-# az ad sp create-for-rbac --name "integration-landing-zone-app-dev" --role contributor --scopes /subscriptions/SubscriptionID --sdk-auth
 ```
 
 ## parameters.json
 
-The parameters.json file contains prefixes to label and differenciate between deployment types (Development, Production, Testing, ETC)
+The parameters.json file contains prefixes to label and differenciate between deployment types
+There are two provided labels
++ workloadName - Labels the purpose of the deployment (ex. Demo, POC, ETC)
++ environment - Stage of the deployment (Development, Production, Testing, ETC)
 
 ```json
 {
