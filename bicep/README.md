@@ -2,8 +2,9 @@
 # Powershell Deployment
 
 ```powershell
-# Set Azure Region
-$LOCATION = "centralus"
+# Set Azure Region 
+# To generate a list of available regions you can execute: az account list-locations -o table
+$LOCATION = "Location Name Here"
 
 # Set Starting Bicep
 $BICEP_FILE="main.bicep"
@@ -12,22 +13,32 @@ $BICEP_FILE="main.bicep"
 az login
 
 # Set SUB to RAM AIRS
-az account set --subscription "86f1b5b3-6a61-4667-b8af-23f9a870b657"
+az account set --subscription "SubscriptionID"
 
 # deploy the bicep file directly
 az deployment sub  create --name testintegrationdeployment --template-file $BICEP_FILE --parameters parameters.json --location $LOCATION -o json
 
-# delete a deployment
-az deployment sub  delete  --name testintegrationdeployment
-
-# az ad sp create-for-rbac --name "integration-landing-zone-app-dev" --role contributor --scopes /subscriptions/86f1b5b3-6a61-4667-b8af-23f9a870b657 --sdk-auth
-
-# Delete any stuck deployments
-az webapp deployment source delete --name <APPNAME> --resource-group <RGNAME>
+# az ad sp create-for-rbac --name "integration-landing-zone-app-dev" --role contributor --scopes /subscriptions/SubscriptionID --sdk-auth
 ```
 
+## parameters.json
 
-## Core Prerequisites
+The parameters.json file contains prefixes to label and differenciate between deployment types (Development, Production, Testing, ETC)
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "workloadName" :{ 
+            "value": "demo"
+        },
+        "environment" :{ 
+            "value": "dev"
+        }
+    }
+}
+```
 
 ## Contents
 
