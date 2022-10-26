@@ -1,7 +1,13 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
-Test
+We are excited to announce the release of the SAP integration accelerator. The purpose of the accelerator is to help customers modernize the way they surface and interact with SAP systems. 
+
+## Prerequisites
+
+* Azure Subscription
+* VS Code
+* Connectivity to SAP - **Link to guide**
 
 ## Contents
 Integration Landing Zone Current State
