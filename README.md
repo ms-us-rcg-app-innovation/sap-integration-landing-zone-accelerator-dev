@@ -3,7 +3,7 @@
 
 We are excited to announce the release of the SAP integration accelerator. The purpose of the accelerator is to help customers modernize the way they surface and interact with SAP systems. This repository contains best practices, samples and reusable code to serve as starting points for your SAP integration projects.
 
-## Prerequisites
+## Core Prerequisites
 
 * Azure Subscription
 * VS Code
@@ -12,12 +12,19 @@ We are excited to announce the release of the SAP integration accelerator. The p
 ## Contents
 
 + Integration Landing Zone Deployment Scripts
-  + Test
++ Configuring SAP Data Connector for LogicApps
++ SAP Credential Mapping
+  + JWT to Basic Credential Exchange
+  + JWT to SAML Token Exchange
++ Asyhronous Patterns
++ Synchronous Pattern
++ End to End Logging and Monitoring
++ Secret Management
 
+## Getting Started
 
-## Core Prerequisites
-
-## Installation
++ Deploying Landing Zone Services
++ 
 
 ## Addons
 
