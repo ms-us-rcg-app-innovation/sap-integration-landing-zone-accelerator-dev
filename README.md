@@ -21,6 +21,12 @@ We are excited to announce the release of the SAP integration accelerator. The p
 + End to End Logging and Monitoring
 + Secret Management
 
+## SAP Connectivity
+
+Brief paragraph about SAP On premise connector
+
+Link to Readme on setting up logic app with SAP
+
 ## Architecture
 
 There are two main scenarios we considered for SAP integrations: Synchronous and Asynchronous.
@@ -64,7 +70,7 @@ The following services will be deployed by the landing zone template
   + [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
   + [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
 
-## SAP Authentication
+## SAP Authentication Considerations
 
 #### JWT to Basic Credential Exchange
 
