@@ -31,6 +31,23 @@ In the synchronous scenario we expose a REST or SOAP HTTP endpoint that can be c
 
 ![Sync Pattern](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/Sync1.png)
 
+### Asynchronous Pattern
+
+The asynchronous pattern can be triggered by either a que or http call. The purpose of the patter is to address high throughput scenarios where the client sends a message and expects a return response without having to wait for the message to be fully processed by the integration flow. 
+
+![Async Pattern](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/Async1.png)
+
+### SAP Credential Exchange Patterns
+
+As part of the SAP integration we are taking into consideration that your SAP instance (depending on kernel) may need to support modern authentication flows such as OAuth. To help address scenarios where the SAP instance relies on either Basic Authentication or SAML we also include a pattern for securely exchanging credential types that is transparent to the client.
+
+#### JWT to Basic Credential Exchange
+
+![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png)
+
+#### JWT to SAML Exchange
+
+![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png)
 
 
 ## Getting Started
