@@ -35,6 +35,9 @@ The following services will be deployed by the landing zone template
   + [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
   + [Logic App](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview)
   + [Service Bus](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
++ General Services
+  + [Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
+  + [Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction)
 + Secret Management
   + [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview)
 + Logging and Monitoring
@@ -42,6 +45,12 @@ The following services will be deployed by the landing zone template
   + [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
 
 ## Addons
+
++ Comming Soon
+  + Vnet Integration
+  + Private DNS Zones
+  + Azure Front Door
+  + Plus More
 
 ## Security
 
