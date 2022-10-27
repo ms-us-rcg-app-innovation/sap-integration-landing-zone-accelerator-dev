@@ -28,6 +28,8 @@ We will be utilizing several Azure services for our SAP integration. The base se
   + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/powershellREADME.md)
   + [Github Actions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
 
+
+
 ## Addons
 
 ## Security
