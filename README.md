@@ -52,9 +52,8 @@ The following services will be deployed by the landing zone template
   + Azure Front Door
   + Plus More
 
-## Security
 
-## Testing
+## Notes
 
 Integration Landing Zone Current State
 - Main Branch: Deploys APIM, Service Bus, KeyVault, Networking, Function, powershell script helper
