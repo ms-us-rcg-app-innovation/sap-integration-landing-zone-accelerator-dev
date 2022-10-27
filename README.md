@@ -27,7 +27,7 @@ There are two main scenarios we considered for SAP integrations: Synchronous and
 
 In the synchronous scenario we expose a REST or SOAP HTTP endpoint that can be called via an external consumer. The request will be processed by the deployed integration services with the SAP back end. A successfull response will return a 200 response once the data is processed and acknowledged by SAP
 
-
+![Sync Pattern](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/Sync1.png)
 
 
 
