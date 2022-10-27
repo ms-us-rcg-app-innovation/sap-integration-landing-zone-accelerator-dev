@@ -26,9 +26,20 @@ We are excited to announce the release of the SAP integration accelerator. The p
 We will be utilizing several Azure services for our SAP integration. The base services are infrastructure as code via Bicep. There are two main methods for deploying the Bicep script.
 
   + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/powershellREADME.md)
-  + [Github Actions](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/app-platform/api-management/security#design-considerations)
+  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/githubREADME.md)
 
+The following services will be deployed by the landing zone template
 
++ Core Integration Services
+  + [API Management](https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts)
+  + [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
+  + [Logic App](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview)
+  + [Service Bus](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
++ Secret Management
+  + [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview)
++ Logging and Monitoring
+  + [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
+  + [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
 
 ## Addons
 
