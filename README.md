@@ -21,6 +21,16 @@ We are excited to announce the release of the SAP integration accelerator. The p
 + End to End Logging and Monitoring
 + Secret Management
 
+## Architecture
+
+There are two main scenarios we considered for SAP integrations: Synchronous and Asynchronous.
+
+In the synchronous scenario we expose a REST or SOAP HTTP endpoint that can be called via an external consumer. The request will be processed by the deployed integration services with the SAP back end. A successfull response will return a 200 response once the data is processed and acknowledged by SAP
+
+
+
+
+
 ## Getting Started
 
 We will be utilizing several Azure services for our SAP integration. The base services are infrastructure as code via Bicep. There are two main methods for deploying the Bicep script.
