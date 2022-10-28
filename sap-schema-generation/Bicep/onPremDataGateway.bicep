@@ -9,7 +9,8 @@ param adminUsername string
 @secure()
 param adminPassword string
 
-var location = resourceGroup().location
+param location string = resourceGroup().location
+
 var OSVersion = 'win11-21h2-pro'
 var vmName = 'opdg-vm'
 var addressPrefix = '10.0.0.0/16'
@@ -17,7 +18,7 @@ var nicName = 'opdgVMNic'
 var subnetName = 'Subnet'
 var subnetPrefix = '10.0.0.0/24'
 var vnetName = 'opdgVNET'
-var networkSecurityGroupName = 'default-NSG'
+var networkSecurityGroupName = 'opdg-default-NSG'
 var vmSize =  'Standard_D2s_v5'
 var azureBastionSubnetAddressPrefix = '10.0.1.0/26'
 
@@ -58,14 +59,6 @@ resource vn 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   }
 }
 
-// resource bastion_subnet 'Microsoft.Network/virtualNetworks/subnets@2020-11-01' = {
-//   name: '${vnetName}/AzureBastionSubnet'
-//   dependsOn:[vn]
-//   properties: {
-//       addressPrefix: azureBastionSubnetAddressPrefix
-//   }
-// }
-
 resource bastion_public_ip 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
   name: 'opdg-bastion-pip'
   location: location
@@ -87,9 +80,6 @@ resource nic 'Microsoft.Network/networkInterfaces@2021-02-01' = {
         name: 'ipconfig1'
         properties: {
           privateIPAllocationMethod: 'Dynamic'
-          // publicIPAddress: {
-          //   id: pip.id  //remove once bastion is up and running
-          // }
           subnet: {
             id: resourceId('Microsoft.Network/virtualNetworks/subnets', vn.name, subnetName)
           }
@@ -158,7 +148,6 @@ resource bastion 'Microsoft.Network/bastionHosts@2020-11-01' = {
                       id: bastion_public_ip.id
                   }
                   subnet: {
-                      //id: bastion_subnet.id
                       id: resourceId('Microsoft.Network/virtualNetworks/subnets', vn.name, 'AzureBastionSubnet')
                   }
               }
