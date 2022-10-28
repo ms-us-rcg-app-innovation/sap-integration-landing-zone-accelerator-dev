@@ -1,7 +1,96 @@
 <!-- ABOUT THE PROJECT -->
 # About The Project
 
+We are excited to announce the release of the SAP integration accelerator. The purpose of the accelerator is to help customers modernize the way they surface and interact with SAP systems. This repository contains best practices, samples and reusable code to serve as starting points for your SAP integration projects.
+
+## Core Prerequisites
+
+* Azure Subscription
+* VS Code
+* Connectivity to SAP - **INSERT LINK TO GUIDE?**
+
 ## Contents
+
++ Integration Landing Zone Deployment Scripts
++ Configuring SAP Data Connector for LogicApps
++ SAP Credential Mapping
+  + JWT to Basic Credential Exchange
+  + JWT to SAML Token Exchange
++ Asyhronous Patterns
++ Synchronous Pattern
++ End to End Logging and Monitoring
++ Secret Management
+
+## SAP Connectivity
+
+Brief paragraph about SAP On premise connector
+
+Link to Readme on setting up logic app with SAP
+
+## Architecture
+
+There are two main scenarios we considered for SAP integrations: Synchronous and Asynchronous.
+
+### Synchronous Pattern
+
+In the synchronous scenario we expose a REST or SOAP HTTP endpoint that can be called via an external consumer. The request will be processed by the deployed integration services with the SAP back end. A successfull response will return a 200 response once the data is processed and acknowledged by SAP
+
+![Sync Pattern](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/Sync1.png)
+
+### Asynchronous Pattern
+
+The asynchronous pattern can be triggered by either a que or http call. The purpose of the patter is to address high throughput scenarios where the client sends a message and expects a return response without having to wait for the message to be fully processed by the integration flow. 
+
+![Async Pattern](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/Async1.png)
+
+### SAP Credential Exchange Patterns
+
+As part of the SAP integration we are taking into consideration that your SAP instance (depending on kernel) may need to support modern authentication flows such as OAuth. To help address scenarios where the SAP instance relies on either Basic Authentication or SAML we also include a pattern for securely exchanging credential types that is transparent to the client.
+
+## Getting Started
+
+We will be utilizing several Azure services for our SAP integration. The base services are infrastructure as code via Bicep. There are two main methods for deploying the Bicep script.
+
+  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/powershellREADME.md)
+  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/githubREADME.md)
+
+The following services will be deployed by the landing zone template
+
++ Core Integration Services
+  + [API Management](https://learn.microsoft.com/en-us/azure/api-management/api-management-key-concepts)
+  + [Function App](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview)
+  + [Logic App](https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-overview)
+  + [Service Bus](https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview)
++ General Services
+  + [Virtual Network](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
+  + [Storage Account](https://learn.microsoft.com/en-us/azure/storage/common/storage-introduction)
++ Secret Management
+  + [Key Vault](https://learn.microsoft.com/en-us/azure/key-vault/general/overview)
++ Logging and Monitoring
+  + [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
+  + [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
+
+## SAP Authentication Considerations
+
+#### JWT to Basic Credential Exchange
+
+![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png)
+
+### JWT to SAML Exchange
+
+![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png)
+
+## Addons
+
++ Comming Soon
+  + Vnet Integration
+  + Private DNS Zones
+  + Azure Front Door
+  + Plus More
+
+
+## Notes
+
 Integration Landing Zone Current State
 - Main Branch: Deploys APIM, Service Bus, KeyVault, Networking, Function, powershell script helper
 - Main Branch: GitHub Workflow to deploy Infra
@@ -69,18 +158,6 @@ Asset Goal/Vision
 Asset Strategy Thoughts and Questions
 Structure: 
 We have a base set of artifacts and scenarios that sit on top.  I think the base artifacts should deploy the infrastructure, wire up monitoring.  I think each scenario should deploy infrastructure that is only used by that scenario and have documentation specific to that scenario.
-
-
-## Core Prerequisites
-
-## Installation
-
-## Addons
-
-## Security
-
-## Testing
-
 ## Retail Materials
 
 ## Architecture
