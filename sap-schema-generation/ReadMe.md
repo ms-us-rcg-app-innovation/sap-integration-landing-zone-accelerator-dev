@@ -35,6 +35,12 @@ The call to SAP will return an array of schemas.  For each schema the workflow w
 
 ## Deployment
 
+### On Prem Data Gateway
+- Create a new windows VM
+- Install the SAP Connector PreRequisites
+- Install the OnPrem Data Gatway
+- Obtain the Gateway InstalationID
+
 
 ## Use
 

@@ -1,4 +1,4 @@
-//Deploy App Service Workflow Plan, LogicApp Workflow configured with vNet integration and private endpoint
+//Deploy App Service Workflow Plan, LogicApp Workflow configured
 //TODO: Wire up and Deploy OnPrem connector
 //TODO: Wire up Instrumentation, possibly make optional
 //TODO: Generate new workflow plan or leverage existing workflow plan selectively
