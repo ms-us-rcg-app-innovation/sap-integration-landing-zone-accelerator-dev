@@ -21,7 +21,8 @@ param deploymentEnvironment string
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
-var workloadName = 'schemaGen'
+param workloadName string = 'schemaGen'
+
 var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
 var LogicAppPlan_name = '${workloadName}-WorkflowPlan-${deploymentEnvironment}-${uniquetoken}'
 var LogicApp_Name = '${workloadName}-${deploymentEnvironment}-${uniquetoken}'
