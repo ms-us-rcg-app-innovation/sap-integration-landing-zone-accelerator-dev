@@ -3,3 +3,4 @@
 .vscode
 local.settings.json
 test
+workflow-designtime/

@@ -1,3 +1,6 @@
+
+//NOTE: Some of these resouces cannot be deployed if the targetScope is subscription
+
 //Deploy App Service Workflow Plan, LogicApp Workflow configured
 //TODO: Wire up and Deploy OnPrem connector
 //TODO: Wire up Instrumentation, possibly make optional
@@ -6,6 +9,12 @@
 //param workflowplanid string 
 //param workspaceId string
 //param appInsightsInstrumentationKey string
+@description('The environment for which the deployment is being executed')
+@allowed([
+  'dev'
+  'uat'
+  'prod'
+])
 param deploymentEnvironment string
 // param OnPremDataConnector string
 

@@ -1,10 +1,155 @@
 {
-  "definition": {
-    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
-    "actions": {},
-    "contentVersion": "1.0.0.0",
-    "outputs": {},
-    "triggers": {}
-  },
-  "kind": "Stateful"
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "For_each_action_URI": {
+                "type": "Foreach",
+                "foreach": "@triggerBody()",
+                "actions": {
+                    "For_each_schema": {
+                        "type": "Foreach",
+                        "foreach": "@body('Generate_schemas')['Schemas']",
+                        "actions": {
+                            "Checks_if_Blob_exists_in_Azure_Storage": {
+                                "type": "ServiceProvider",
+                                "inputs": {
+                                    "parameters": {
+                                        "containerName": "schemas",
+                                        "blobName": "@{items('For_each_action_URI')['name']}/@{items('For_each_schema')['Name']}.xsd"
+                                    },
+                                    "serviceProviderConfiguration": {
+                                        "connectionName": "AzureBlob",
+                                        "operationId": "blobExists",
+                                        "serviceProviderId": "/serviceProviders/AzureBlob"
+                                    }
+                                },
+                                "runAfter": {}
+                            },
+                            "Condition": {
+                                "type": "If",
+                                "expression": {
+                                    "and": [
+                                        {
+                                            "equals": [
+                                                "@body('Checks_if_Blob_exists_in_Azure_Storage')?['isBlobExists']",
+                                                true
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "actions": {
+                                    "Deletes_a_Blob_from_Azure_Storage": {
+                                        "type": "ServiceProvider",
+                                        "inputs": {
+                                            "parameters": {
+                                                "containerName": "schemas",
+                                                "blobName": "@{items('For_each_action_URI')['name']}/@{items('For_each_schema')['Name']}.xsd"
+                                            },
+                                            "serviceProviderConfiguration": {
+                                                "connectionName": "AzureBlob",
+                                                "operationId": "deleteBlob",
+                                                "serviceProviderId": "/serviceProviders/AzureBlob"
+                                            }
+                                        },
+                                        "runAfter": {}
+                                    }
+                                },
+                                "runAfter": {
+                                    "Checks_if_Blob_exists_in_Azure_Storage": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            },
+                            "Uploads_a_Blob_to_Azure_Storage": {
+                                "type": "ServiceProvider",
+                                "inputs": {
+                                    "parameters": {
+                                        "containerName": "schemas",
+                                        "blobName": "@{items('For_each_action_URI')['name']}/@{items('For_each_schema')['Name']}.xsd",
+                                        "content": "@base64ToString(items('For_each_schema')['Content'])"
+                                    },
+                                    "serviceProviderConfiguration": {
+                                        "connectionName": "AzureBlob",
+                                        "operationId": "uploadBlob",
+                                        "serviceProviderId": "/serviceProviders/AzureBlob"
+                                    }
+                                },
+                                "runAfter": {
+                                    "Condition": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            }
+                        },
+                        "runAfter": {
+                            "Generate_schemas": [
+                                "Succeeded"
+                            ]
+                        }
+                    },
+                    "Generate_schemas": {
+                        "type": "ApiConnection",
+                        "inputs": {
+                            "host": {
+                                "connection": {
+                                    "referenceName": "sap_1"
+                                }
+                            },
+                            "method": "post",
+                            "body": [
+                                "@items('For_each_action_URI')['actionURI']"
+                            ],
+                            "path": "/GenerateSchemas",
+                            "queries": {
+                                "fileNamePrefix": ""
+                            }
+                        },
+                        "runAfter": {}
+                    }
+                },
+                "runAfter": {}
+            },
+            "Response": {
+                "type": "Response",
+                "kind": "http",
+                "inputs": {
+                    "statusCode": 200
+                },
+                "runAfter": {
+                    "For_each_action_URI": [
+                        "Succeeded"
+                    ]
+                }
+            }
+        },
+        "triggers": {
+            "manual": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "items": {
+                            "properties": {
+                                "actionURI": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "actionURI"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {}
+    },
+    "kind": "Stateful"
 }

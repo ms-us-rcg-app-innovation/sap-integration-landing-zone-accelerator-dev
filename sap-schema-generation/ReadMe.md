@@ -34,6 +34,8 @@ The call to SAP will return an array of schemas.  For each schema the workflow w
 ![](images/GenerateSchemaFlowDetail.png)
 
 ## Deployment
+The solution uses components deployed as a part of the base deployment.  Please ensure that that environment has been deployed first.
+
 
 ### On Prem Data Gateway
 - Create a new windows VM

@@ -1,0 +1,29 @@
+{
+  "serviceProviderConnections": {
+    "AzureBlob": {
+      "parameterValues": {
+        "connectionString": "@appsetting('AzureBlob_connectionString')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/AzureBlob"
+      },
+      "displayName": "SchemaStorageConnection"
+    }
+  },
+  "managedApiConnections": {
+    "sap_1": {
+      "api": {
+        "id": "/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/providers/Microsoft.Web/locations/westus2/managedApis/sap"
+      },
+      "connection": {
+        "id": "/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/resourceGroups/rcg-appinovation-opdc/providers/Microsoft.Web/connections/sap-2"
+      },
+      "connectionRuntimeUrl": "https://2c382f1fea04f1cf.14.common.logic-westus2.azure-apihub.net/apim/sap/82051b94eba34ddfa0f2c2d7ce6dbac2/",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('sap_1-connectionKey')"
+      }
+    }
+  }
+}
