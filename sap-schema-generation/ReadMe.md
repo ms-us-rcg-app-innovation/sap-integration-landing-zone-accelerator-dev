@@ -38,12 +38,14 @@ The solution uses components deployed as a part of the base deployment.  Please 
 
 
 ### On Prem Data Gateway
-- Create a new windows VM
-- Install the SAP Connector PreRequisites
-- Install the OnPrem Data Gatway
-- Obtain the Gateway InstalationID
+Use the bastion host to access the VM which will host your on prem data gateway(opdg) and open a browser and download the file found here; https://www.microsoft.com/en-us/download/details.aspx?id=53127.  Once installed, you will be asked to authenticate against azure to finsh the setup.
 
+To use the SAP connector there are several prerequisits that need to be installed on the opdg computer, and you will need to make sure that the SAP user being used has the correct permissions within SAP.  For details, please see the documentation; https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-using-sap-connector.  Here is a link to the SAP connector for .NET; https://support.sap.com/en/product/connectors/msnet.html.
+
+
+Obtain the Gateway InstalationID and write it down for later use.
 
 ## Use
+There is a test file located in the TestFiles directory which will post three actionURIs to the service which will generate and store several schemas in your storage account.
 
 ## Understanding and Using Generated Schemas
