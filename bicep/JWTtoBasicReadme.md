@@ -41,14 +41,14 @@ Assuming successfull JWT validation at this stage we have a variable with the JW
 In the following example we extract the subject of the token to perform the basic credential lookup.
 
 ```xml
-<set-variable name="jwt_username_value" value="@(((Jwt)context.Variables["jwt-token"]).Subject)" />
+<set-variable name="jwt_cred_value" value="@(((Jwt)context.Variables["jwt-token"]).Subject)" />
 ```
 
 We then use extracted subject and use it as a query parameter to pefrorm the lookup API call. The response is stored in the 'my-basic-creds' variable. 
 
 ```xml
 <send-request mode="new" response-variable-name="my-basic-creds" timeout="60" ignore-error="true">
-    <set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_username_value"]}")</set-url>
+    <set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
     <set-method>GET</set-method>
 </send-request>
 ```
@@ -61,4 +61,33 @@ The authorization header now can be changed from the JWT content to the basic cr
 </set-header>
 ```
 
-The entire flow is transparent to the client/application as well as the SAP system. 
+The entire flow is transparent to the client/application as well as the SAP system resulting in a complete auth integration pattern.
+
+### High Throughput Considerations
+
+The JWT to Basic auth mapping utilizes APIM's ability to call REST API's through policy. It is important to note that the policy is evaluated with every call to the API. In scenarios requiring high throughput it may be beneficial to utilize APIM's internal cache to store the credential mapping in lieu of performing the lookup call each policy execution.
+
+First we check if the basic credential value already exists in cache. If the lookup results in a hit the cached value will be used as the authorization header.
+If the cache lookup is a miss we will make a call to the lookup function and for subsequent calls store the result in APIM cache. 
+
+```xml
+<cache-lookup-value key="@((string)context.Variables["jwt_cred_value"])" default-value="CredCacheMiss" variable-name="cachedcreds" caching-type="internal" />
+<choose>
+    <when condition="@((string)context.Variables["cachedcreds"] !="CredCacheMiss")">
+        <set-header name="Authorization" exists-action="override">
+            <value>@("Basic "+(string)context.Variables["cachedcreds"])</value>
+        </set-header>
+    </when>
+    <when condition="@((string)context.Variables["cachedcreds"] =="CredCacheMiss")">
+        <send-request mode="new" response-variable-name="my-id" timeout="10" ignore-error="true">
+            <set-url>@($"https://functionapp-data-ingestion-demo-dev.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
+            <set-method>GET</set-method>
+        </send-request>
+        <set-variable name="BasicAuthCreds" value="@(((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())" />
+        <cache-store-value key="@((string)context.Variables["jwt_cred_value"])" value="@(((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())" duration="900" caching-type="internal" />
+        <set-header name="Authorization" exists-action="override">
+            <value>@("Basic "+((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
+        </set-header>
+    </when>
+</choose>
+```
