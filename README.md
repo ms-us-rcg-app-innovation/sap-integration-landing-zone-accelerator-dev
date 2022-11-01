@@ -14,7 +14,7 @@ We are excited to announce the release of the SAP integration accelerator. The p
 + Integration Landing Zone Deployment Scripts
 + Configuring SAP Data Connector for LogicApps
 + SAP Credential Mapping
-  + JWT to Basic Credential Exchange
+  + [JWT to Basic Credential Exchange](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/JWTtoBasicReadme.md)
   + JWT to SAML Token Exchange
 + Asyhronous Patterns
 + Synchronous Pattern
