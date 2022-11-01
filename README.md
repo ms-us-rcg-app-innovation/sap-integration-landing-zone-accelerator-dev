@@ -19,7 +19,7 @@ We are excited to announce the release of the SAP integration accelerator. The p
   + [JWT to Basic Credential Exchange](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/JWTtoBasicReadme.md)
   + JWT to SAML Token Exchange
 + Asyhronous Patterns
-+ Synchronous Pattern
++ Synchronous Patterns
 + End to End Logging and Monitoring
 + Secret Management
 
