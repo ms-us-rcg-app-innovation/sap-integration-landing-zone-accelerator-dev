@@ -5,7 +5,13 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 1. Validate the JWT Token
 2. Look Up Basic Credentials based on token claims
-3. Pass the 
+3. Pass the Basic Credentials to SAP back end
+
+![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png)
+
+## APIM Policy
+
+Documentation on APIM Policy https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies
 
 and through policy retrieve the corresponding username/password pair. 
 
