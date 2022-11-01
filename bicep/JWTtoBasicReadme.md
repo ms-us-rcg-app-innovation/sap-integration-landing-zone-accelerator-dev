@@ -11,7 +11,7 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 ## APIM Policy
 
-+ [APIM Policy Documentation / How To](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
+[APIM Policy Documentation / How To](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
 ### APIM Policy
 
@@ -23,7 +23,7 @@ The following policy will validate the received JWT token against the indentity 
 	</validate-jwt>
 ```
 
-We can also perform auth decisions based on the passed claims. In this case we are examening the audience claim and confirming the desired value is present. 
+We can also perform initial auth decisions based on the passed claims. In this case we are examening the audience claim and confirming the desired value is present. 
 
 ```xml
 	<validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid" output-token-variable-name="jwt-token">
@@ -34,4 +34,20 @@ We can also perform auth decisions based on the passed claims. In this case we a
 			</claim>
 		</required-claims>
 	</validate-jwt>
+```
+
+Assuming successfull JWT validation at this stage we have a variable with the JWT contents called 'jwt-token'. In order to differenciate levels of access we now need to use one or more properties/claims of the JWT token to perform a lookup of the corresponding credentials. 
+
+In the following example we take the subject of the token to perform the basic credential lookup.
+
+```xml
+<set-variable name="jwt_username_value" value="@(((Jwt)context.Variables["jwt-token"]).Subject)" />
+	<set-variable name="my-id" value="my-id test" />
+	<send-request mode="new" response-variable-name="my-id" timeout="60" ignore-error="true">
+		<set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_username_value"]}")</set-url>
+		<set-method>GET</set-method>
+	</send-request>
+	<set-header name="Authorization" exists-action="override">
+		<value>@("Basic "+((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
+	</set-header>
 ```
