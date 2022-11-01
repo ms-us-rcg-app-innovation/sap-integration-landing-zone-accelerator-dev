@@ -13,12 +13,12 @@
   "managedApiConnections": {
     "sap_1": {
       "api": {
-        "id": "/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/providers/Microsoft.Web/locations/westus2/managedApis/sap"
+        "id": "/subscriptions/@{appsetting('WORKFLOWS_SUBSCRIPTION_ID')}/providers/Microsoft.Web/locations/@{appsetting('WORKFLOWS_LOCATION_NAME')}/managedApis/sap"
       },
       "connection": {
-        "id": "/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/resourceGroups/rcg-appinovation-opdc/providers/Microsoft.Web/connections/sap-2"
+        "id": "/subscriptions/@{appsetting('WORKFLOWS_SUBSCRIPTION_ID')}/resourceGroups/@{appsetting('WORKFLOWS_RESOURCE_GROUP_NAME')}/providers/Microsoft.Web/connections/sap-2"
       },
-      "connectionRuntimeUrl": "https://2c382f1fea04f1cf.14.common.logic-westus2.azure-apihub.net/apim/sap/82051b94eba34ddfa0f2c2d7ce6dbac2/",
+      "connectionRuntimeUrl": "@parameters('SAP-RuntimeUrl')",
       "authentication": {
         "type": "Raw",
         "scheme": "Key",

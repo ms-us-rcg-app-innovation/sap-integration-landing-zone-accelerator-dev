@@ -1,0 +1,92 @@
+//Need to use an ARM template for connections
+//While I can deploy a connection from an arm template
+//I cannot retreive the connectionRuntimeURL
+//For More Information and Status update; https://github.com/Azure/bicep/issues/3494
+
+
+//You will need to have the On Prem Data Gateway installed and grabe the external id from that resource and
+//then edit the connection to add the data gateway.... Still working this out, little bit of Chicken and egg.
+//Commented lines are left as placeholders
+
+//SAP Username and SAP Password, unsure of where to add that in the template.  Need to inspect the resource graph to find
+
+//Output variable(s): outputting the connectionRuntimeURL.  This is used by the logicapp in the connections.json file.  The value should be moved to and
+//referenced from the parameters.json file.  When deploying the logicApp, need to pass the value / set the parameter.
+
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "connections_sap_2_name": {
+            "defaultValue": "sap-2",
+            "type": "String"
+        }//,
+        // "connectionGateways_rcg_appinnovation_opdgtwy_externalid": {
+        //     "defaultValue": "/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/resourceGroups/rcg-appinovation-opdc/providers/Microsoft.Web/connectionGateways/rcg-appinnovation-opdgtwy",
+        //     "type": "String"
+        // }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Web/connections",
+            "apiVersion": "2016-06-01",
+            "name": "[parameters('connections_sap_2_name')]",
+            "location": "centralus",
+            "kind": "V2",
+            "properties": {
+                "displayName": "sapConnection",
+                "customParameterValues": {
+                },
+                "parameterValues": {
+                    "client": "100",
+                    "authType": "basic",
+                    "logonType": "ApplicationServer",
+                    "appServerHost": "sap.clearsoftware.com",
+                    "systemNumber": "00",
+                    "safeTyping": "false",
+                    "useSnc": "false",
+                    "sncSso": "On",
+                    "sncQop": "Authentication"
+                },
+                "nonSecretParameterValues": {
+                    // "gateway": {
+                    //     "name": "rcg-appinnovation-opdgtwy",
+                    //     "id": "[parameters('connectionGateways_rcg_appinnovation_opdgtwy_externalid')]",
+                    //     "type": "Microsoft.Web/connectionGateways"
+                    // },
+                    // "client": "100",
+                    // "authType": "basic",
+                    // "logonType": "ApplicationServer",
+                    // "appServerHost": "sap.clearsoftware.com",
+                    // "systemNumber": "00",
+                    // "safeTyping": "false",
+                    // "useSnc": "false",
+                    // "sncSso": "On",
+                    // "sncQop": "Authentication"
+                },
+                "api": {
+                    "name": "sap",
+                    "displayName": "SAP",
+                    "description": "SAP Application Server and Message Server messages",
+                    "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1600/1.0.1600.3026/sap/icon.png",
+                    "brandColor": "#99e7ff",
+                    "id": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/centralus/managedApis/sap')]",
+                    "type": "Microsoft.Web/locations/managedApis"
+                }//,
+                // "testLinks": [
+                //     {
+                //         "requestUri": "[concat('https://management.azure.com:443/subscriptions/d2b5a7e0-0e80-487d-9f84-c0ef277e5831/resourceGroups/rcg-appinnovation-integrationenv1/providers/Microsoft.Web/connections/', parameters('connections_sap_2_name'), '/extensions/proxy/testconnection?api-version=2016-06-01')]",
+                //         "method": "get"
+                //     }
+                // ]
+            }
+        }
+    ],
+      "outputs": {
+    "sapConnectionRuntimeUrl": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/connections', parameters('connections_sap_2_name')),'2016-06-01', 'full').properties.connectionRuntimeUrl]"
+    }
+  }
+}

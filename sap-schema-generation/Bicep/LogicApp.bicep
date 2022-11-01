@@ -150,6 +150,26 @@ resource sites_schemagen_name_resource 'Microsoft.Web/sites@2022-03-01' = {
           value: '~14'
 
         }
+        {
+          name: 'WORKFLOWS_TENANT_ID'
+          value: subscription().tenantId
+        }
+        {
+          name: 'WORKFLOWS_SUBSCRIPTION_ID'
+          value: subscription().id
+        }
+        {
+          name: 'WORKFLOWS_RESOURCE_GROUP_NAME'
+          value: resourceGroup().name
+        }
+        {
+          name: 'WORKFLOWS_LOCATION_NAME'
+          value: location
+        }
+        {
+          name: 'WORKFLOWS_MANAGEMENT_BASE_URI'
+          value: 'https://management.azure.com'
+        }
       ]
     }
     scmSiteAlsoStopped: false
