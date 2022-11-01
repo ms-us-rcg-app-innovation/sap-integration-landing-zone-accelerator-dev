@@ -20,6 +20,14 @@ The following policy will validate the received JWT token against the indentity 
 ```xml
 	<validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid" output-token-variable-name="jwt-token">
 		<openid-config url="<Identity Provider .well-known config URL>" />
+	</validate-jwt>
+```
+
+We can also perform auth decisions based on the passed claims. In this case we are examening the audience claim and confirming the desired value is present. 
+
+```xml
+	<validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid" output-token-variable-name="jwt-token">
+		<openid-config url="<Identity Provider .well-known config URL>" />
 		<required-claims>
 			<claim name="aud">
 				<value>api://default</value>
