@@ -11,16 +11,9 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 ## APIM Policy
 
-Documentation on APIM Policy https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies
++ [APIM Policy](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
 and through policy retrieve the corresponding username/password pair. 
 
 
-In a case where a modern application utilizes the OAuth standard 
-
-Depending on SAP version / configuration it may be advantageous to 
-
-Many SAP integration scenarios may require enabling support for basic credentials when it comes to communicating with the SAP back end. Supported auth models vary based on SAP version and deployment. In cases where the SAP back end relies on basic credentia methodology (username/password) we can 
-
-## APIM Policy
 
