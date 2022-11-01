@@ -12,6 +12,8 @@ We are excited to announce the release of the SAP integration accelerator. The p
 ## Contents
 
 + Integration Landing Zone Deployment Scripts
+  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/githubREADME.md)
+  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/powershellREADME.md)
 + Configuring SAP Data Connector for LogicApps
 + SAP Credential Mapping
   + [JWT to Basic Credential Exchange](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/JWTtoBasicReadme.md)
