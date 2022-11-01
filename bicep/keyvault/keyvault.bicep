@@ -36,6 +36,7 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
     softDeleteRetentionInDays: 7
     tenantId: subscription().tenantId
   }
+
 }
 
 output KeyVaultName string = keyVaultName
