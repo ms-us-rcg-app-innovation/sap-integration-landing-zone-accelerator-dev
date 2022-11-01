@@ -43,6 +43,9 @@ Kick of infrastructure deployment to your default subscription with
 Kick off infrastructure deployment to a specified subscription
 ```az deployment sub create --location <location> --subscription <subscription> -f bicep\main.bicep ```
 
+To deploy the application, you need to simply zip the project and deploy it as a function app.
+``` az functionapp deploy --resource-group sap-integration-lz-schemaGen-dev -n schemaGen-dev-667mu --src-path c:/test/testlogicappdeploy.zip ```
+
 ### On Prem Data Gateway
 Use the bastion host to access the VM which will host your on prem data gateway(opdg) and open a browser and download the file found here; https://www.microsoft.com/en-us/download/details.aspx?id=53127.  Once installed, you will be asked to authenticate against azure to finsh the setup.
 
