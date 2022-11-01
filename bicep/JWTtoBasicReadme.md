@@ -48,7 +48,7 @@ We then use extracted subject and use it as a query parameter to pefrorm the loo
 
 ```xml
 <send-request mode="new" response-variable-name="my-basic-creds" timeout="60" ignore-error="true">
-    <set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
+    <set-url>@($"https://lookupFunctionURL.azurewebsites.net/api/FunctionName?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
     <set-method>GET</set-method>
 </send-request>
 ```
@@ -65,7 +65,7 @@ The entire flow is transparent to the client/application as well as the SAP syst
 
 ### High Throughput Considerations
 
-The JWT to Basic auth mapping utilizes APIM's ability to call REST API's through policy. It is important to note that the policy is evaluated with every call to the API. In scenarios requiring high throughput it may be beneficial to utilize APIM's internal cache to store the credential mapping in lieu of performing the lookup call each policy execution.
+The JWT to Basic auth mapping utilizes APIM's ability to call REST API's during policy evaulation. It is important to note that the policy is evaluated with every call to the API. In scenarios requiring high throughput it may be beneficial to utilize APIM's internal cache to store the credential mapping in lieu of performing the lookup call each policy execution.
 
 First we check if the basic credential value already exists in cache. If the lookup results in a hit the cached value will be used as the authorization header.
 If the cache lookup is a miss we will make a call to the lookup function and for subsequent calls store the result in APIM cache. 
@@ -80,7 +80,7 @@ If the cache lookup is a miss we will make a call to the lookup function and for
     </when>
     <when condition="@((string)context.Variables["cachedcreds"] =="CredCacheMiss")">
         <send-request mode="new" response-variable-name="my-id" timeout="10" ignore-error="true">
-            <set-url>@($"https://functionapp-data-ingestion-demo-dev.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
+            <set-url>@($"https://lookupFunctionURL.azurewebsites.net/api/FunctionName?username={(string)context.Variables["jwt_cred_value"]}")</set-url>
             <set-method>GET</set-method>
         </send-request>
         <set-variable name="BasicAuthCreds" value="@(((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())" />
