@@ -38,16 +38,27 @@ We can also perform initial auth decisions based on the passed claims. In this c
 
 Assuming successfull JWT validation at this stage we have a variable with the JWT contents called 'jwt-token'. In order to differenciate levels of access we now need to use one or more properties/claims of the JWT token to perform a lookup of the corresponding credentials. 
 
-In the following example we take the subject of the token to perform the basic credential lookup.
+In the following example we extract the subject of the token to perform the basic credential lookup.
 
 ```xml
 <set-variable name="jwt_username_value" value="@(((Jwt)context.Variables["jwt-token"]).Subject)" />
-<set-variable name="my-id" value="my-id test" />
-<send-request mode="new" response-variable-name="my-id" timeout="60" ignore-error="true">
+```
+
+We then use extracted subject and use it as a query parameter to pefrorm the lookup API call. The response is stored in the 'my-basic-creds' variable. 
+
+```xml
+<send-request mode="new" response-variable-name="my-basic-creds" timeout="60" ignore-error="true">
     <set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_username_value"]}")</set-url>
     <set-method>GET</set-method>
 </send-request>
+```
+
+The authorization header now can be changed from the JWT content to the basic credential retrieived from our lookup function.
+
+```xml
 <set-header name="Authorization" exists-action="override">
-    <value>@("Basic "+((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
+    <value>@("Basic "+((IResponse)context.Variables["my-basic-creds"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
 </set-header>
 ```
+
+The entire flow is transparent to the client/application as well as the SAP system. 
