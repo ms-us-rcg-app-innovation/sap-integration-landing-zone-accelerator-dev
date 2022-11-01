@@ -49,11 +49,13 @@ As part of the SAP integration we are taking into consideration that the SAP ins
 
 #### JWT to Basic Credential Exchange
 
-![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png)
+
+
+<!-- ![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png) -->
 
 ### JWT to SAML Exchange
 
-![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png)
+<!-- ![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png) -->
 
 ## Getting Started
 
