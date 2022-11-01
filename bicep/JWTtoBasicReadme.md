@@ -17,7 +17,7 @@ As part of the deployment script APIM policies are deployed as fragments.
 
 [APIM Policy Fragments](https://learn.microsoft.com/en-us/azure/api-management/policy-fragments)
 
-### APIM Policy Details
+### APIM Policy Overview
 
 The following policy will validate the received JWT token against the indentity provider. The incoming JWT token is passed as the "Authorization" header. As a result of successfull validation the content of the token is stored in a variable 'jwt-token' for use in subsequent policy blocks. 
 
