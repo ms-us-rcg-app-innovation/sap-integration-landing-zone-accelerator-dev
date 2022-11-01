@@ -13,7 +13,7 @@ param location string = resourceGroup().location
 param workloadName string = 'schemaGen'
 
 var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
-var schema_Storage_Name = toLower('${workloadName}stor${deploymentEnvironment}${uniquetoken}')
+var schema_Storage_Name = toLower('${workloadName}${deploymentEnvironment}${uniquetoken}')
 
 output storageName string = schema_Storage_Name
 

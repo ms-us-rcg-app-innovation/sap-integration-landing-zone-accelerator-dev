@@ -7,7 +7,6 @@ targetScope = 'subscription'
   'uat'
   'prod'
 ])
-
 param environment string
 
 param location string = deployment().location
@@ -20,7 +19,7 @@ param adminPassword string
 
 // Variables
 var workloadName = 'schemaGen'
-var resourceSuffix = '${workloadName}-${environment}-${location}-001'
+var resourceSuffix = '${workloadName}-${environment}' //-${location}-001' this seems overkill
 var SchemaGeneratorResourceGroupName = 'sap-integration-lz-${resourceSuffix}'
 
 resource IntegrationSchemaGenRG 'Microsoft.Resources/resourceGroups@2021-04-01' = {

@@ -26,7 +26,7 @@ param workloadName string = 'schemaGen'
 var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
 var LogicAppPlan_name = '${workloadName}-WorkflowPlan-${deploymentEnvironment}-${uniquetoken}'
 var LogicApp_Name = '${workloadName}-${deploymentEnvironment}-${uniquetoken}'
-var LogicApp_Storage_Name = toLower('${workloadName}stor${deploymentEnvironment}${uniquetoken}')
+var LogicApp_Storage_Name = toLower('${workloadName}lgstor${deploymentEnvironment}${uniquetoken}')
 
 resource storageAccounts_WorkflowPlanStorage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   name: LogicApp_Storage_Name

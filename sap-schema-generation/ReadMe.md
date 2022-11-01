@@ -36,6 +36,12 @@ The call to SAP will return an array of schemas.  For each schema the workflow w
 ## Deployment
 The solution uses components deployed as a part of the base deployment.  Please ensure that that environment has been deployed first.
 
+Kick of infrastructure deployment to your default subscription with
+
+```az deployment sub create --location <location> -f bicep\main.bicep ```
+
+Kick off infrastructure deployment to a specified subscription
+```az deployment sub create --location <location> --subscription <subscription> -f bicep\main.bicep ```
 
 ### On Prem Data Gateway
 Use the bastion host to access the VM which will host your on prem data gateway(opdg) and open a browser and download the file found here; https://www.microsoft.com/en-us/download/details.aspx?id=53127.  Once installed, you will be asked to authenticate against azure to finsh the setup.
@@ -49,3 +55,10 @@ Obtain the Gateway InstalationID and write it down for later use.
 There is a test file located in the TestFiles directory which will post three actionURIs to the service which will generate and store several schemas in your storage account.
 
 ## Understanding and Using Generated Schemas
+
+## TODO
+- Automate OPDG install and configure
+- Automate SAP Prereq install
+- Capture outputs from infra deploy and pass to app deploy
+- Configure Monitoring
+- powershell to deploy application
