@@ -45,7 +45,20 @@ The asynchronous pattern can be triggered by either a que or http call. The purp
 
 ### SAP Credential Exchange Patterns
 
-As part of the SAP integration we are taking into consideration that your SAP instance (depending on kernel) may need to support modern authentication flows such as OAuth. To help address scenarios where the SAP instance relies on either Basic Authentication or SAML we also include a pattern for securely exchanging credential types that is transparent to the client.
+As part of the SAP integration we are taking into consideration that the SAP instance (depending on kernel) may need to support modern authentication flows such as OAuth. To help address scenarios where the SAP instance relies on either Basic Authentication or SAML we also include a pattern for securely exchanging credential types that is transparent to the client.
+
+#### JWT to Basic Credential Exchange
+
+Modern applications supporting OAuth standard for access delegation can securely connect to SAP back end using a JWT to basic credential exchange pattern. The method utilizes APIM policy to capture and validate the JWT token against the identity provider endpoint. The token payload information can then be used to retreive additional back end credentials to interact with SAP endpoints.
++ [JWT to Basic Credential Exchange Walkthrough](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/bicep/JWTtoBasicReadme.md)
+
+<!-- ![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png) -->
+
+#### JWT to SAML Exchange
+
+TBD
+
+<!-- ![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png) -->
 
 ## Getting Started
 
@@ -69,16 +82,6 @@ The following services will be deployed by the landing zone template
 + Logging and Monitoring
   + [Log Analytics Workspace](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
   + [Application Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net)
-
-## SAP Authentication Considerations
-
-#### JWT to Basic Credential Exchange
-
-![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png)
-
-### JWT to SAML Exchange
-
-![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png)
 
 ## Addons
 
