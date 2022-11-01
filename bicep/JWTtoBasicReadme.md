@@ -13,7 +13,11 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 [APIM Policy Documentation / How To](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
-### APIM Policy
+As part of the deployment script APIM policies are deployed as fragments. 
+
+[APIM Policy Fragments](https://learn.microsoft.com/en-us/azure/api-management/policy-fragments)
+
+### APIM Policy Details
 
 The following policy will validate the received JWT token against the indentity provider. The incoming JWT token is passed as the "Authorization" header. As a result of successfull validation the content of the token is stored in a variable 'jwt-token' for use in subsequent policy blocks. 
 
@@ -91,3 +95,8 @@ If the cache lookup is a miss we will make a call to the lookup function and for
     </when>
 </choose>
 ```
+
+## Azure Function Code
+
+
+
