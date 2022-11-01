@@ -11,7 +11,7 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 ## APIM Policy
 
-+ [APIM Policy](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
++ [APIM Policy Documentation / How To](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
 ### APIM Policy
 
