@@ -13,7 +13,17 @@ In this scenario we tackle a challenge where a modern application utilizing OAut
 
 + [APIM Policy](https://learn.microsoft.com/en-us/azure/api-management/api-management-howto-policies)
 
-and through policy retrieve the corresponding username/password pair. 
+### APIM Policy
 
+The following policy will validate the received JWT token against the indentity provider. The incoming JWT token is passed as the "Authorization" header. As a result of successfull validation the content of the token is stored in a variable 'jwt-token' for use in subsequent policy blocks. 
 
-
+```xml
+	<validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid" output-token-variable-name="jwt-token">
+		<openid-config url="<Identity Provider .well-known config URL>" />
+		<required-claims>
+			<claim name="aud">
+				<value>api://default</value>
+			</claim>
+		</required-claims>
+	</validate-jwt>
+```
