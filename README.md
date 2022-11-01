@@ -49,11 +49,15 @@ As part of the SAP integration we are taking into consideration that the SAP ins
 
 #### JWT to Basic Credential Exchange
 
+Modern applications supporting OAuth standard for access delegation can securely connect to SAP back end using a JWT to basic credential exchange pattern. The method utilizes APIM policy to capture and validate the JWT token against the identity provider endpoint. The token payload information can then be used to retreive additional back end credentials to interact with SAP endpoints.
 
+  + JWT to Basic Credential Exchange Walkthrough
 
 <!-- ![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png) -->
 
-### JWT to SAML Exchange
+#### JWT to SAML Exchange
+
+TBD
 
 <!-- ![JWTSAML](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTSAML.png) -->
 
