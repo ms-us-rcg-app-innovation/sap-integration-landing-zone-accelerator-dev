@@ -42,12 +42,12 @@ In the following example we take the subject of the token to perform the basic c
 
 ```xml
 <set-variable name="jwt_username_value" value="@(((Jwt)context.Variables["jwt-token"]).Subject)" />
-	<set-variable name="my-id" value="my-id test" />
-	<send-request mode="new" response-variable-name="my-id" timeout="60" ignore-error="true">
-		<set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_username_value"]}")</set-url>
-		<set-method>GET</set-method>
-	</send-request>
-	<set-header name="Authorization" exists-action="override">
-		<value>@("Basic "+((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
-	</set-header>
+<set-variable name="my-id" value="my-id test" />
+<send-request mode="new" response-variable-name="my-id" timeout="60" ignore-error="true">
+    <set-url>@($"https://functionapp-data-ingestion-demo-dev-dnet.azurewebsites.net/api/GetCredentialsHardcoded?username={(string)context.Variables["jwt_username_value"]}")</set-url>
+    <set-method>GET</set-method>
+</send-request>
+<set-header name="Authorization" exists-action="override">
+    <value>@("Basic "+((IResponse)context.Variables["my-id"]).Body.As<JObject>(preserveContent:true)["credentials"].ToString())</value>
+</set-header>
 ```
