@@ -12,13 +12,13 @@ We are excited to announce the release of the SAP integration accelerator. The p
 ## Contents
 
 + Integration Landing Zone Deployment Scripts
-  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/githubREADME.md)
-  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/powershellREADME.md)
+  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/githubREADME.md)
+  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/powershellREADME.md)
 + Configuring SAP Data Connector for LogicApps
 + SAP Credential Mapping
-  + [JWT to Basic Credential Exchange](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/JWTtoBasicReadme.md)
+  + [JWT to Basic Credential Exchange](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/JWTtoBasicReadme.md)
   + JWT to SAML Token Exchange
-+ [Asyhronous Patterns](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/asyncPatternREADME.md)
++ [Asyhronous Patterns](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/asyncPatternREADME.md)
 + Synchronous Patterns
 + End to End Logging and Monitoring
 + Secret Management
@@ -52,7 +52,7 @@ As part of the SAP integration we are taking into consideration that the SAP ins
 #### JWT to Basic Credential Exchange
 
 Modern applications supporting OAuth standard for access delegation can securely connect to SAP back end using a JWT to basic credential exchange pattern. The method utilizes APIM policy to capture and validate the JWT token against the identity provider endpoint. The token payload information can then be used to retreive additional back end credentials to interact with SAP endpoints.
-+ [JWT to Basic Credential Exchange Walkthrough](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/JWTtoBasicReadme.md)
++ [JWT to Basic Credential Exchange Walkthrough](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/JWTtoBasicReadme.md)
 
 <!-- ![JWTBasic](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/JWTBasic.png) -->
 
@@ -66,8 +66,8 @@ TBD
 
 We will be utilizing several Azure services for our SAP integration. The base services are infrastructure as code via Bicep. There are two main methods for deploying the Bicep script.
 
-  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/powershellREADME.md)
-  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/doc/githubREADME.md)
+  + [Powershell](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/powershellREADME.md)
+  + [Github Actions](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/docs/githubREADME.md)
 
 The following services will be deployed by the landing zone template
 
