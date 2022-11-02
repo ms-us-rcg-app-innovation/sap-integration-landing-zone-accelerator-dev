@@ -1,7 +1,7 @@
 ### Uses Extension: REST Client by Huachao Mao
 
 ### Get post url by right clicking on workflow.json and reviewing the overview
-POST http://localhost:7071/api/Get_Schemas/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CSfBHT3I8x-71iC4YjUIpx4F40FLpCaUqG8Y_FeZMiM HTTP/1.1
+POST http://localhost:7071/api/GenerateSchemas/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=9-fGfv_m3LLvPBUaT5ED1ZuFbCFXFaoY05U3XYyGkhQ HTTP/1.1
 content-type: application/json
 
 [

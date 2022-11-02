@@ -54,10 +54,38 @@ To use the SAP connector there are several prerequisits that need to be installe
 
 Obtain the Gateway InstalationID and write it down for later use.
 
-## Use
+### Deploy the workflow
+- Run powershell script
+
+### Setup local dev environment
+- Clone
+- Fix Connections.json file
+- Fix Parameters.json file
+- Obtain new bearer token
+
+## Testing and using
+Run the azure storage emulator locally on your machine.  This is required by the logicapp.  Alternatively, you can point your locally running logicApp to an azure storage account.
+
 There is a test file located in the TestFiles directory which will post three actionURIs to the service which will generate and store several schemas in your storage account.
 
+In visual studio code, debug the application to start a local instance
+
+You will need to update the URI used by the test file to point to your locally running instance of the workflow and have the appropriate keys.  Right click on the workflow.json file in the GenerateSchemas folder and select 'Overview'.  NOTE: your workflow must be running for Overview to work.  This will show you the URI to the locally running instance.  Copy the URI and overwrite the one in the test file.
+
+If you have the REST client extension by Huachao Mao installed, you should see a send link appear above the URL.  You can also use that URL and payload in another other tool, such as Postman.
+
+After invoking the logicApp, if everything is configured correctly, you should have three folders in your storage account container and two schemas in each folder.  NOTE: that these must exist on SAP and the credentials used to access SAP must be able to access them.
+
 ## Understanding and Using Generated Schemas
+The generated schemas will typically have two files per RFC/BAPI/iDOC.  rfc.xsd and types.xsd.  rfc.xsd represents the interface you are calling and the types.xsd file represents the tables used by the interface.
+
+Unless you have an XML tool that can generate sample xml from linked xsd files, you are going to have to do some manual work.
+
+Manually create an xml file based on the rfc.xsd.  Anywhere you see a node referencing a type, note the type, we will be able to generate them and then copy the values to build out the sample document.
+
+use https://www.liquid-technologies.com/online-xsd-to-xml-converter do build out sample XML from the types.rfc file.
+
+
 
 ## TODO
 - Automate OPDG install and configure
