@@ -1,0 +1,50 @@
+namespace WriteCustomLogsToApplicationInsights
+{
+    public static class CustomLogs
+    {
+        [FunctionName("CustomLogs")]
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log)
+        {
+            log.Info("C# HTTP trigger function processed a request.");
+
+            TelemetryClient telemetry = new TelemetryClient();
+            telemetry.InstrumentationKey = "384a6401-3bed-400c-8e36-e248f397c3bb";
+
+
+            ///--------------------------------------***Trace Log Simple Information***----------------------------------------------//
+           log.Info("Writing TrackTrace with SeverityLevel - Information.");
+            telemetry.TrackTrace("This is a Custom Trace Log.", SeverityLevel.Information);
+            ///---------------------------------------******-------------------------------------------------------------------------//
+
+
+            ///--------------------------------------***Trace Log Simple Warning***----------------------------------------------//
+           log.Info("Writing TrackTrace with SeverityLevel - Warning.");
+            telemetry.TrackTrace("This is a Custom Trace Log.", SeverityLevel.Warning);
+            ///---------------------------------------******-------------------------------------------------------------------------//
+
+
+            ///--------------------------------------***Trace Log With Extra Properties***----------------------------------------------//
+           log.Info("Writing TrackTrace with custom properties.");
+            telemetry.TrackTrace("This is a Custom Trace Log.", SeverityLevel.Information, new Dictionary<string, string> { { "databaseid", new Guid().ToString()} });
+            ///---------------------------------------******-------------------------------------------------------------------------//
+
+
+            ///--------------------------------------***Exception Log***-------------------------------------------------------------//
+           log.Info("Writing TrackException.");
+            Exception exception = new Exception("This is a custom Exception.");
+            telemetry.TrackException(exception);
+            ///---------------------------------------******-------------------------------------------------------------------------//
+
+
+            ///---------------------------------------***Flushing***-------------------------------------------//
+           log.Info("Flushing..");
+            telemetry.Flush();
+            // Allow some time for flushing before shutdown.
+            System.Threading.Thread.Sleep(5000);
+            ///---------------------------------------******-------------------------------------------//
+            log.Info("Completed.");
+
+            return req.CreateResponse(HttpStatusCode.OK, "Success ");
+        }
+    }
+}
