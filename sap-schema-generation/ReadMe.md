@@ -36,7 +36,7 @@ The call to SAP will return an array of schemas.  For each schema the workflow w
 ## Deployment
 The solution uses components deployed as a part of the base deployment.  Please ensure that that environment has been deployed first.
 
-Kick of infrastructure deployment to your default subscription with
+Kick of infrastructure deployment to your default subscription with by running the deployment script .\deploymentscript.ps1.  If you would rather deploy the infrastructure independent of the app code or if you run into an issue with the script, you can use the following commands to deploy the scenario
 
 ```az deployment sub create --location <location> -f bicep\main.bicep ```
 
@@ -52,21 +52,23 @@ Use the bastion host to access the VM which will host your on prem data gateway(
 To use the SAP connector there are several prerequisits that need to be installed on the opdg computer, and you will need to make sure that the SAP user being used has the correct permissions within SAP.  For details, please see the documentation; https://learn.microsoft.com/en-us/azure/logic-apps/logic-apps-using-sap-connector.  Here is a link to the SAP connector for .NET; https://support.sap.com/en/product/connectors/msnet.html.
 
 
-Obtain the Gateway InstalationID and write it down for later use.
+You will need to obtain\create the onPrem data gateway's external id.  This will be used to connect the Azure API connection with the OnPrem Data Gateway.  The external id is in the following format
 
-### Deploy the workflow
-- Run powershell script
+```  /subscriptions/<subscriptionid>/resourceGroups/<resourcegroup where deployed>/providers/Microosft.Web/connectionGateways/<gateway name>  ```
 
-### Setup local dev environment
-- Clone
-- Fix Connections.json file
-- Fix Parameters.json file
-- Obtain new bearer token
+You  can find the external id by running the OnPrem data gateway application, selecting diagnostics and exporting the logs.  Open the GatewayClusters.txt file in notepad.  The external/resourceId will be in the metadata field which is in the same json object as the gatewayId.
+
+Once you have the externalId, you need to go to the Azure API Connection and edit its configuration.  You will see an empty 'Data Gateway' field.  drop the externalId in that field and save your changes.  The connector will validate the information and return an error if there is a problem.  
+
+## Configuring Local Development Environment
+There are a couple of settings we need to change in connections.json, local.settings.json, and parameters.json.  These changes will allow you to test and debug your application locally.
+
+NOTE: not sure if I have to update these changes prior to zipping and deploying the workflow to the logicapp.... 
 
 ## Testing and using
 Run the azure storage emulator locally on your machine.  This is required by the logicapp.  Alternatively, you can point your locally running logicApp to an azure storage account.
 
-There is a test file located in the TestFiles directory which will post three actionURIs to the service which will generate and store several schemas in your storage account.
+There is a test file located in the root directory which will post three actionURIs to the service which will generate and store several schemas in your storage account.
 
 In visual studio code, debug the application to start a local instance
 
@@ -84,8 +86,6 @@ Unless you have an XML tool that can generate sample xml from linked xsd files, 
 Manually create an xml file based on the rfc.xsd.  Anywhere you see a node referencing a type, note the type, we will be able to generate them and then copy the values to build out the sample document.
 
 use https://www.liquid-technologies.com/online-xsd-to-xml-converter do build out sample XML from the types.rfc file.
-
-
 
 ## TODO
 - Automate OPDG install and configure

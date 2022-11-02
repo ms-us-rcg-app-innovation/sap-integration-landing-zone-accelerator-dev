@@ -18,6 +18,8 @@
 param deploymentEnvironment string
 // param OnPremDataConnector string
 
+param AzureBlob_connectionString string
+
 @description('Location for all resources.')
 param location string = resourceGroup().location
 
@@ -156,7 +158,7 @@ resource sites_schemagen_name_resource 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'WORKFLOWS_SUBSCRIPTION_ID'
-          value: subscription().id
+          value: subscription().subscriptionId
         }
         {
           name: 'WORKFLOWS_RESOURCE_GROUP_NAME'
@@ -169,6 +171,10 @@ resource sites_schemagen_name_resource 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'WORKFLOWS_MANAGEMENT_BASE_URI'
           value: 'https://management.azure.com'
+        }
+        {
+          name: 'AzureBlob_connectionString'
+          value: AzureBlob_connectionString
         }
       ]
     }

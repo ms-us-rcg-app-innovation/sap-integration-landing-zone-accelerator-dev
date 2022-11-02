@@ -11,14 +11,17 @@ param adminPassword string
 
 param location string = resourceGroup().location
 
+var uniquetoken = substring(uniqueString(resourceGroup().id),0,5)
 var OSVersion = 'win11-21h2-pro'
-var vmName = 'opdg-vm'
+var pipName = 'opdg-bastion-pip-${uniquetoken}'
+var vmName = 'opdg-vm-${uniquetoken}'
+var bastionName = 'opdg-bastion-${uniquetoken}'
 var addressPrefix = '10.0.0.0/16'
-var nicName = 'opdgVMNic'
+var nicName = 'opdgVMNic-${uniquetoken}'
 var subnetName = 'Subnet'
 var subnetPrefix = '10.0.0.0/24'
-var vnetName = 'opdgVNET'
-var networkSecurityGroupName = 'opdg-default-NSG'
+var vnetName = 'opdgVNET-${uniquetoken}'
+var networkSecurityGroupName = 'opdg-default-NSG-${uniquetoken}'
 var vmSize =  'Standard_D2s_v5'
 var azureBastionSubnetAddressPrefix = '10.0.1.0/26'
 
@@ -60,7 +63,7 @@ resource vn 'Microsoft.Network/virtualNetworks@2021-02-01' = {
 }
 
 resource bastion_public_ip 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
-  name: 'opdg-bastion-pip'
+  name: pipName
   location: location
   sku: {
       name: 'Standard'
@@ -133,7 +136,7 @@ resource vm 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 }
 
 resource bastion 'Microsoft.Network/bastionHosts@2020-11-01' = {
-  name: 'opdg-bastion'
+  name: bastionName
   location: location
   sku: {
       name: 'Basic'

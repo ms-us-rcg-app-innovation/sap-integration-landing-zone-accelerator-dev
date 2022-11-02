@@ -45,9 +45,15 @@ resource storageAccounts_SchemaStorage 'Microsoft.Storage/storageAccounts@2022-0
 }
 
 resource schemaContainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-05-01' = {
-  name: '${storageAccounts_SchemaStorage.name}/default/schemastorage'
+  name: '${storageAccounts_SchemaStorage.name}/default/schemas'
   properties: {
     publicAccess: 'None'
     metadata: {}
   }
 }
+
+//there is no connection string property so it has to be generated
+var storagePrimaryKey = listKeys(storageAccounts_SchemaStorage.id, storageAccounts_SchemaStorage.apiVersion).keys[0].value
+var storageprimaryConnStr = 'DefaultEndpointsProtocol=https;AccountName=${schema_Storage_Name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storagePrimaryKey}'
+
+output schemaStorageConnectionString string = storageprimaryConnStr
