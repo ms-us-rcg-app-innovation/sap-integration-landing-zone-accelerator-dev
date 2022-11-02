@@ -3,12 +3,16 @@
 
 An asynchronous methods return a response to the caller immediately before the completion of its processing. In this SAP integration flow we demonstrate two patterns for Asynchronous message processing. 
 
+### Sync
+   
+![Asunc Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/asyncTrigger.png)
 ### Async -> Async
    
 ![Message Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/messageTrigger.png)
-### Sync 
+### Sync -> Async
    
 ![Asunc Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/asyncTrigger.png)
+
 
 ## Prerequisites
 
