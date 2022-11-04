@@ -7,7 +7,7 @@ We are excited to announce the release of the SAP integration accelerator. The p
 
 * Azure Subscription
 * VS Code
-* Connectivity to SAP - **INSERT LINK TO GUIDE?**
+* Connectivity to SAP
 
 ## Contents
 
