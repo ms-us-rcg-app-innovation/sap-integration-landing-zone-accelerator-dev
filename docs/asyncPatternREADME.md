@@ -5,7 +5,7 @@ An asynchronous methods return a response to the caller immediately before the c
 
 ### Sync
    
-![Asunc Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/asyncTrigger.png)
+![Sync Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/syncTrigger.png)
 ### Async -> Async
    
 ![Message Trigger](https://github.com/ms-us-rcg-app-innovation/sap-integration-landing-zone-accelerator-dev/blob/main/diagrams/messageTrigger.png)

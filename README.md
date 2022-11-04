@@ -95,7 +95,7 @@ The following services will be deployed by the landing zone template
 
 
 ## Notes
-
+<!-- 
 Integration Landing Zone Current State
 - Main Branch: Deploys APIM, Service Bus, KeyVault, Networking, Function, powershell script helper
 - Main Branch: GitHub Workflow to deploy Infra
@@ -162,7 +162,7 @@ Asset Goal/Vision
 
 Asset Strategy Thoughts and Questions
 Structure: 
-We have a base set of artifacts and scenarios that sit on top.  I think the base artifacts should deploy the infrastructure, wire up monitoring.  I think each scenario should deploy infrastructure that is only used by that scenario and have documentation specific to that scenario.
+We have a base set of artifacts and scenarios that sit on top.  I think the base artifacts should deploy the infrastructure, wire up monitoring.  I think each scenario should deploy infrastructure that is only used by that scenario and have documentation specific to that scenario. -->
 ## Retail Materials
 
 ## Architecture
