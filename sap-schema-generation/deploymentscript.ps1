@@ -20,6 +20,9 @@ Write-Output "deploying infrastructure...."
 ### Deploy the bicep into th users default subscription
 $deployoutput = az deployment sub create -l $LOCATION -n $deploymentName -f $BICEP_FILE -p environment=$resourceSuffix adminUsername=someuser adminPassword='Password$123' uniqueSuffix=$uniqueSuffix
 
+### will work on automating this further later, the final manual steps are fairly workable... if this picks up in popularity
+### will make sense to complete the automation
+
 ### read output into variables
  #$sapConnectionRuntimeUrl = (Get-AzResourceGroupDeployment -ResourceGroupName $resourcegroup -Name $deploymentName>).Outputs.sapConnectionRuntimeUrl.value
 
@@ -32,12 +35,10 @@ $deployoutput = az deployment sub create -l $LOCATION -n $deploymentName -f $BIC
      ### see: https://devblogs.microsoft.com/scripting/working-with-json-data-in-powershell/
      ### see: https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/parsing-json-with-powershell/ba-p/2768721
 
-Write-Output "creating deployment package"
+### Write-Output "creating deployment package"
 
 ### Zip LogicApp folder for deployment
-### There is a bug here... this creates a logicapp folder within the zip file and has the contents of the workflow there.
-### The contents of the workflow needs to be at the root of the zip archive to work.
-Compress-Archive .\LogicApp deploymentPackage.Zip
+### Compress-Archive .\LogicApp\*.* deploymentPackage.Zip
 
 ### Deploy LogicApp (function deployment)
 ### should look something like: az functionapp deploy --resource-group sap-integration-lz-schemaGen-uat -n schemaGen-uat-fkb5w --src-path ./deploymentPackage.zip --type zip

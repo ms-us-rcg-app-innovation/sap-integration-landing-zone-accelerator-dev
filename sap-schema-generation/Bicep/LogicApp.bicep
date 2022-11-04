@@ -158,7 +158,7 @@ resource sites_schemagen_name_resource 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'WORKFLOWS_SUBSCRIPTION_ID'
-          value: subscription().subscriptionId
+          value: subscription().id
         }
         {
           name: 'WORKFLOWS_RESOURCE_GROUP_NAME'
