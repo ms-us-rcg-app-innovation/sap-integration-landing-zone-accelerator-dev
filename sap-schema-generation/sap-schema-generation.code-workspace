@@ -1,0 +1,15 @@
+{
+    "folders":[
+        {
+            "path":".",
+            "name":"root"
+        },
+        {
+            "path":"LogicApp",
+            "name":"LogicApp Workflow"
+        }
+    ],
+    "settings": {
+        "powershell.cwd": "c:\\Source\\sap-integration-landing-zone-accelerator-dev\\sap-schema-generation"
+    }
+}

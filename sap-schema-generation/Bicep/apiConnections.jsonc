@@ -18,7 +18,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "connections_sap_2_name": {
-            "defaultValue": "sap-2",
+            "defaultValue": "sap-schemagen",
             "type": "String"
         }//,
         // "connectionGateways_rcg_appinnovation_opdgtwy_externalid": {

@@ -1,0 +1,6 @@
+{
+  "SAP-RuntimeUrl": {
+    "type": "String",
+    "value": "https://ae43cac3a0c151ff.00.common.logic-centralus.azure-apihub.net/apim/sap/5e39dba486d5407d97d806a875ed5293"
+  }
+}

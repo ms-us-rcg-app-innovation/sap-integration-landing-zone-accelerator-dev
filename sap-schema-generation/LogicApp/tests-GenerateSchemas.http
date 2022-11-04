@@ -1,0 +1,31 @@
+### Uses Extension: REST Client by Huachao Mao
+
+
+### Azure URI
+### Obtain the URI from the workflow overview page in the azure portal
+@AzureUri = https://schemagen-uat-tiys7.azurewebsites.net:443/api/GenerateSchemas/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XkUpAT3kFddPYj1wSJvDKqKpW2xcgdivNNoJfP8Hkas
+
+### Local URI
+### Obtain the URI from the logcal overview page by right clicking workflow.json and selecting overview from within visual studio code
+@LocalUri = http://localhost:7071/api/GenerateSchemas/triggers/manual/invoke?api-version=2022-05-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=t0r0_FGRMqRyEfOax5I5CxTsMk-q2AHF5ToS9JbbCOI
+
+### Test Local
+POST {{LocalUri}}
+content-type: application/json
+
+[
+    {"name":"BAPI_MATERIAL_LIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GETLIST"},
+    {"name":"BAPI_MATERIAL_GET_DETAIL","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GET_DETAIL"},
+    {"name":"BAPI_MATPHYSINV_GETLIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Bapi/BUS2028/GETLIST/BAPI_MATPHYSINV_GETLIST"}
+]
+
+
+### Test Azure
+POST {{AzureUri}} HTTP/1.1
+content-type: application/json
+
+[
+    {"name":"BAPI_MATERIAL_LIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GETLIST"},
+    {"name":"BAPI_MATERIAL_GET_DETAIL","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Rfc/BAPI_MATERIAL_GET_DETAIL"},
+    {"name":"BAPI_MATPHYSINV_GETLIST","actionURI":"http://Microsoft.LobServices.Sap/2007/03/Bapi/BUS2028/GETLIST/BAPI_MATPHYSINV_GETLIST"}
+]

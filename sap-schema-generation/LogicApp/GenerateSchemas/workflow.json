@@ -92,7 +92,7 @@
                         "inputs": {
                             "host": {
                                 "connection": {
-                                    "referenceName": "sap_1"
+                                    "referenceName": "sap"
                                 }
                             },
                             "method": "post",

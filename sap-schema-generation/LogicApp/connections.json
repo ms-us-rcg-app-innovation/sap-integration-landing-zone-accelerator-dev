@@ -1,0 +1,29 @@
+{
+  "serviceProviderConnections": {
+    "AzureBlob": {
+      "parameterValues": {
+        "connectionString": "@appsetting('AzureBlob_connectionString')"
+      },
+      "serviceProvider": {
+        "id": "/serviceProviders/AzureBlob"
+      },
+      "displayName": "SchemaStorageConnection"
+    }
+  },
+  "managedApiConnections": {
+    "sap": {
+      "api": {
+        "id": "/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/providers/Microsoft.Web/locations/centralus/managedApis/sap"
+      },
+      "connection": {
+        "id": "/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/sap-integration-lz-schemaGen-uat/providers/Microsoft.Web/connections/sap-schemagen"
+      },
+      "connectionRuntimeUrl": "https://ae43cac3a0c151ff.00.common.logic-centralus.azure-apihub.net/apim/sap/5e39dba486d5407d97d806a875ed5293",
+      "authentication": {
+        "type": "Raw",
+        "scheme": "Key",
+        "parameter": "@appsetting('sap-connectionKey')"
+      }
+    }
+  }
+}
