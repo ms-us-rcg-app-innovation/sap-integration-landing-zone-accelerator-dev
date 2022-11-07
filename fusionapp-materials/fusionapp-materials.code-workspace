@@ -1,0 +1,12 @@
+{
+    "folders":[
+        {
+            "path":".",
+            "name":"root"
+        },
+        {
+            "path":"LogicApp",
+            "name":"LogicApp Workflow"
+        }
+    ]
+}
