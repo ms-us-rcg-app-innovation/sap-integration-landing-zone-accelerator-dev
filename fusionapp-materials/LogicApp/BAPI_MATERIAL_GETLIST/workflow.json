@@ -6,7 +6,31 @@
                 "type": "Response",
                 "kind": "http",
                 "inputs": {
-                    "statusCode": 200
+                    "statusCode": 200,
+                    "body": "@body('[RFC]_Call_function_in_SAP')?['JsonResponse']"
+                },
+                "runAfter": {
+                    "[RFC]_Call_function_in_SAP": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "[RFC]_Call_function_in_SAP": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "sap_1"
+                        }
+                    },
+                    "method": "post",
+                    "body": "<BAPI_MATERIAL_GETLIST xmlns=\"http://Microsoft.LobServices.Sap/2007/03/Rfc/\">\n   <MATNRSELECTION>\n        <BAPIMATRAM xmlns=\"http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/\">\n            <SIGN>I</SIGN>\n            <OPTION>CP</OPTION>\n            <MATNR_LOW>*</MATNR_LOW>\n        </BAPIMATRAM>\n   </MATNRSELECTION>\n   <PLANTSELECTION>\n\t  <BAPIMATRAW xmlns=\"http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/\">\n  \t\t<SIGN>I</SIGN>\n  \t\t<OPTION>CP</OPTION>\n  \t\t<PLANT_LOW>*</PLANT_LOW>\n\t  </BAPIMATRAW>\n   </PLANTSELECTION>\n   <SALESORGANISATIONSELECTION>\n\t  <BAPIMATRASO xmlns=\"http://Microsoft.LobServices.Sap/2007/03/Types/Rfc/\">\n  \t\t<SIGN>I</SIGN>\n  \t\t<OPTION>CP</OPTION>\n  \t\t<SALESORG_LOW>*</SALESORG_LOW>\n\t  </BAPIMATRASO>\n   </SALESORGANISATIONSELECTION>\n</BAPI_MATERIAL_GETLIST>",
+                    "path": "/CallRfc",
+                    "queries": {
+                        "rfcName": "BAPI_MATERIAL_GETLIST:Supply List of Materials for Search Criteria Transferred:BUS1001",
+                        "rfcGroupFilter": "*:All RFC groups",
+                        "autoCommit": false
+                    }
                 },
                 "runAfter": {}
             }

@@ -6,7 +6,31 @@
                 "type": "Response",
                 "kind": "http",
                 "inputs": {
-                    "statusCode": 200
+                    "statusCode": 200,
+                    "body": "@body('[RFC]_Call_function_in_SAP')?['JsonResponse']"
+                },
+                "runAfter": {
+                    "[RFC]_Call_function_in_SAP": [
+                        "Succeeded"
+                    ]
+                }
+            },
+            "[RFC]_Call_function_in_SAP": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "referenceName": "sap_1"
+                        }
+                    },
+                    "method": "post",
+                    "body": "<BAPI_MATERIAL_GET_DETAIL xmls=\"http://Microsoft.LobServices.Sap/2007/03/Rfc/\">\n    <MATERIAL>@{triggerBody()?['Material']}</MATERIAL>\n</BAPI_MATERIAL_GET_DETAIL>",
+                    "path": "/CallRfc",
+                    "queries": {
+                        "rfcName": "BAPI_MATERIAL_GET_DETAIL:Determine Details for a Material:BUS1001",
+                        "rfcGroupFilter": "*:All RFC groups",
+                        "autoCommit": false
+                    }
                 },
                 "runAfter": {}
             }
@@ -15,7 +39,16 @@
             "manual": {
                 "type": "Request",
                 "kind": "Http",
-                "inputs": {}
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "Material": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
             }
         },
         "contentVersion": "1.0.0.0",
