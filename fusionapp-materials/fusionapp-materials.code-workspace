@@ -8,5 +8,8 @@
             "path":"LogicApp",
             "name":"LogicApp Workflow"
         }
-    ]
+    ],
+    "settings": {
+        "debug.internalConsoleOptions": "neverOpen"
+    }
 }
