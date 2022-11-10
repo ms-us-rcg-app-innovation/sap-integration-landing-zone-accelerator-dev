@@ -33,6 +33,23 @@ Note: sample screen shot of the power application
 
 ## Deployment
 
+work in progress
+
+I need to get the URL from the workflows so I can pass that to the API I am deploying to APIM.  I can get the full URL via the following
+
+``` az rest --method post --uri /subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/sap-integration-lz-schemaGen-uat/providers/Microsoft.Web/sites/schemaGen-uat-tiys7/hostruntime/runtime/webhooks/workflow/api/management/workflows/GenerateSchemas/triggers/manual/listCallbackUrl?api-version=2018-11-01 ```
+
+Really, all I need is the sig or key value.... still looking
+
+Here is a command that will list all the workflows within a workflow app
+
+``` az rest --method get --uri "https://management.azure.com/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/sap-integration-lz-schemaGen-uat/providers/Microsoft.Web/sites/schemaGen-uat-tiys7/hostruntime/runtime/webhooks/workflow/api/management/workflows?api-version=2018-11-01" ```
+
+
+take a look at this post; https://stackoverflow.com/questions/71355379/logic-app-standard-automate-reference-to-workflow-accross-environments
+
+
+
 ### Infrastructure
 
 ### Application
