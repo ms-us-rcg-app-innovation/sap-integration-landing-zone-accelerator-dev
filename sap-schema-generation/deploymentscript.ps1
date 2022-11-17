@@ -1,11 +1,11 @@
 # Set Azure Region
-$LOCATION = "centralus"
+$LOCATION = "eastus"
 
 # Set starting Bicep
 $BICEP_FILE = ".\Bicep\main.bicep"
 
 #choose to mark this as a dev environment vs uat or prod
-$resourceSuffix = "uat"
+$resourceSuffix = "dev"
 
 #use this if you have multiple people deploying to the same subscription, change this for each deployment
 $uniqueSuffix = ""

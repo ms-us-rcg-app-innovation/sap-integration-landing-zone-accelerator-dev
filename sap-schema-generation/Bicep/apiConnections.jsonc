@@ -32,7 +32,7 @@
             "type": "Microsoft.Web/connections",
             "apiVersion": "2016-06-01",
             "name": "[parameters('connections_sap_2_name')]",
-            "location": "centralus",
+            "location": "[resourcegroup().location]",
             "kind": "V2",
             "properties": {
                 "displayName": "sapConnection",
@@ -71,7 +71,7 @@
                     "description": "SAP Application Server and Message Server messages",
                     "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1600/1.0.1600.3026/sap/icon.png",
                     "brandColor": "#99e7ff",
-                    "id": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/centralus/managedApis/sap')]",
+                    "id": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Web/locations/', resourcegroup().location, '/managedApis/sap')]",
                     "type": "Microsoft.Web/locations/managedApis"
                 }//,
                 // "testLinks": [

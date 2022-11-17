@@ -1,0 +1,194 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApimServiceName": {
+      "type": "string"
+    },
+    "PolicyXMLSasToken": {
+      "type": "string"
+    },
+    "PolicyXMLBaseUrl": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "properties": {
+        "description": "",
+        "authenticationSettings": {
+          "subscriptionKeyRequired": false
+        },
+        "subscriptionKeyParameterNames": {
+          "header": "Ocp-Apim-Subscription-Key",
+          "query": "subscription-key"
+        },
+        "apiRevision": "1",
+        "isCurrent": true,
+        "subscriptionRequired": true,
+        "displayName": "Materials",
+        "serviceUrl": "http://someendpoint.com",
+        "path": "Materials",
+        "protocols": [
+          "https"
+        ]
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials')]",
+      "type": "Microsoft.ApiManagement/service/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "contentType": "application/vnd.oai.openapi.components+json",
+        "document": {
+          "components": {
+            "schemas": {
+              "Material Detail Request": {
+                "type": "object",
+                "properties": {
+                  "Material": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials/1668088423731')]",
+      "type": "Microsoft.ApiManagement/service/apis/schemas",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'materials')]"
+      ]
+    },
+    {
+      "properties": {
+        "templateParameters": [],
+        "description": "Return Material Details",
+        "request": {
+          "description": "Post the Material ID to retrieve material details",
+          "queryParameters": [],
+          "headers": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "sample": "{\r\n  \"Material\": \"000000000000000078\"\r\n}",
+              "schemaId": "1668088423731",
+              "typeName": "Material Detail Request"
+            }
+          ]
+        },
+        "responses": [],
+        "displayName": "Bapi_Material_Get_Detail",
+        "method": "POST",
+        "urlTemplate": "/Bapi_Material_Get_Detail"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials/bapi-material-get-detail')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'materials')]",
+        "[resourceId('Microsoft.ApiManagement/service/apis/schemas', parameters('ApimServiceName'), 'materials', '1668088423731')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "[concat(parameters('PolicyXMLBaseUrl'), '/materials-bapi-material-get-detail-operationPolicy.xml', parameters('PolicyXMLSasToken'))]",
+        "format": "rawxml-link"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials/bapi-material-get-detail/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'materials', 'bapi-material-get-detail')]"
+      ]
+    },
+    {
+      "properties": {
+        "templateParameters": [],
+        "description": "Get a list of materials",
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": []
+        },
+        "responses": [],
+        "displayName": "Bapi_Material_GetList",
+        "method": "POST",
+        "urlTemplate": "/Bapi_Material_GetList"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials/bapi-material-getlist')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'materials')]"
+      ]
+    },
+    {
+      "properties": {
+        "value": "[concat(parameters('PolicyXMLBaseUrl'), '/materials-bapi-material-getlist-operationPolicy.xml', parameters('PolicyXMLSasToken'))]",
+        "format": "rawxml-link"
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/materials/bapi-material-getlist/policy')]",
+      "type": "Microsoft.ApiManagement/service/apis/operations/policies",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis/operations', parameters('ApimServiceName'), 'materials', 'bapi-material-getlist')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('ApimServiceName'), '/starter/materials')]",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'materials')]"
+      ]
+    },
+    {
+      "name": "[concat(parameters('ApimServiceName'), '/unlimited/materials')]",
+      "type": "Microsoft.ApiManagement/service/products/apis",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": [
+        "[resourceId('Microsoft.ApiManagement/service/apis', parameters('ApimServiceName'), 'materials')]"
+      ]
+    },
+    {
+      "properties": {
+        "alwaysLog": "allErrors",
+        "loggerId": "/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/APIM/providers/Microsoft.ApiManagement/service/KarlRissApim/loggers/krisslgdeploytest-dev",
+        "httpCorrelationProtocol": "Legacy",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        },
+        "frontend": {
+          "request": {}
+        },
+        "backend": {
+          "request": {}
+        }
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/applicationinsights')]",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": []
+    },
+    {
+      "properties": {
+        "loggerId": "/subscriptions/412b86d9-242b-452c-8273-a4da78837adc/resourceGroups/APIM/providers/Microsoft.ApiManagement/service/KarlRissApim/loggers/azuremonitor",
+        "logClientIp": true,
+        "sampling": {
+          "samplingType": "fixed",
+          "percentage": 100.0
+        }
+      },
+      "name": "[concat(parameters('ApimServiceName'), '/azuremonitor')]",
+      "type": "Microsoft.ApiManagement/service/diagnostics",
+      "apiVersion": "2021-01-01-preview",
+      "dependsOn": []
+    }
+  ]
+}
